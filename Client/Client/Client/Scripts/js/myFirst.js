@@ -24,7 +24,8 @@ function init() {
 
 // initialize the widget
     $("#stundenplan").kendoWindow({
-        title: "Stundenplan"
+        title: "Stundenplan",
+        id: "test"
     });
     $("#userinfo").kendoWindow({
         title: "User Infos"
@@ -38,12 +39,42 @@ function init() {
     $("#new").kendoWindow({
         title: "Folgt..."
     });
+    $("#chat").kendoWindow({
+        title: "Klassenchat"
+    });
     $("#menu").kendoMenu({
         animation: { open: { effects: "fadeIn" } }
     });
-// get the wrapper
-    var winWrapper = $("#stundenplan").data("kendoWindow").wrapper; // returns div.k-window as a jQuery object
-
+    
+    //Anordnen der Widgets
+    $("#stundenplan").closest(".k-window").css({
+        top: "20%",
+        left: "20%"
+    });
+    $("#userinfo").closest(".k-window").css({
+        top: "20%",
+        left: "40%"
+    });
+    
+    $("#new").closest(".k-window").css({
+        top: "20%",
+        left: "60%"
+    });
+    $("#infoIHK").closest(".k-window").css({
+        top: "20%",
+        left: "70%"
+    });
+    $("#termine").closest(".k-window").css({
+        top: "40%",
+        left: "20%",
+        width: "60%"
+    });
+    $("#chat").closest(".k-window").css({
+        top: "70%",
+        left: "20%",
+        width: "60%"
+    });
+    
 }
 $( document ).ready(function(){
     init();
