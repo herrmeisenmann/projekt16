@@ -10,17 +10,36 @@
     <li onclick="showWidget('new')">Folgt..</li>
     <li onclick="showWidget('termine')">Terminliste</li>
 </ul>
-
-            <div id="stundenplan">hier kommt der Sundenplan rein...</div>
-            <div id="userinfo">hier kommen infos über den schüler rein...</div>
-            <div id="infoIHK">hier kommen infos über die ihk rein...</div>
-            <div id="new">Irgendwas</div>
-            <div id="termine">
-                hier kommt eine termin tabelle rein
-                <div id="termineGrid"></div>
-            </div>
-            <div id="chat">Hier kommt der Chat rein...</div>
-
+<div class="gridlayout">
+    <div id="stundenplan">hier kommt der Sundenplan rein...</div>
+    <div id="userinfo">
+        <ul class="fieldlist">
+            <li>
+                <label>Vorname</label>
+                <span style="width: 100%;">Niklas</span>
+            </li>
+            <li>
+                <label>Name</label>
+                <span style="width: 100%;">Grieger</span>
+            </li>
+            <li>
+                <label>Beruf</label>
+                <span style="width: 100%;">FIAE</span>
+            </li>
+            <li>
+                <label>Klasse</label>
+                <span style="width: 100%;">IT4a</span>
+            </li>
+        </ul>
+    </div>
+    <div id="infoIHK">hier kommen infos über die ihk rein...</div>
+    <div id="new">Irgendwas</div>
+    <div id="termine">
+        hier kommt eine termin tabelle rein
+        <div id="termineGrid"></div>
+    </div>
+    <div id="chat">Hier kommt der Chat rein...</div>
+</div>
 @section scripts
 {
     <link rel="stylesheet" href="~/Scripts/KendoUI/styles/kendo.common.min.css" />

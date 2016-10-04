@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 04. Okt 2016 um 12:22
+-- Erstellungszeit: 04. Okt 2016 um 13:25
 -- Server-Version: 5.6.24
 -- PHP-Version: 5.6.8
 
@@ -28,10 +28,11 @@ USE `sit_project`;
 -- Tabellenstruktur für Tabelle `beruf`
 --
 
+DROP TABLE IF EXISTS `beruf`;
 CREATE TABLE IF NOT EXISTS `beruf` (
   `beruf_id` int(11) NOT NULL,
-  `bezeichnung` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `bezeichnung` text CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `beruf`
@@ -47,6 +48,7 @@ INSERT INTO `beruf` (`beruf_id`, `bezeichnung`) VALUES
 -- Tabellenstruktur für Tabelle `class`
 --
 
+DROP TABLE IF EXISTS `class`;
 CREATE TABLE IF NOT EXISTS `class` (
   `class_id` int(11) NOT NULL,
   `bezeichnung` text NOT NULL,
@@ -73,10 +75,11 @@ INSERT INTO `class` (`class_id`, `bezeichnung`, `stundenplan_id`) VALUES
 -- Tabellenstruktur für Tabelle `stundenplan`
 --
 
+DROP TABLE IF EXISTS `stundenplan`;
 CREATE TABLE IF NOT EXISTS `stundenplan` (
   `stundenplan_id` int(11) NOT NULL,
   `stundenplan_blob` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -84,13 +87,31 @@ CREATE TABLE IF NOT EXISTS `stundenplan` (
 -- Tabellenstruktur für Tabelle `termine`
 --
 
+DROP TABLE IF EXISTS `termine`;
 CREATE TABLE IF NOT EXISTS `termine` (
   `termine_id` int(11) NOT NULL,
-  `bezeichnung` text NOT NULL,
-  `datum` datetime NOT NULL,
-  `kommentar` longtext,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `bezeichnung` text CHARACTER SET latin1 NOT NULL,
+  `Fach` text CHARACTER SET latin1 NOT NULL,
+  `datum` date NOT NULL,
+  `kommentar` longtext CHARACTER SET latin1,
+  `user_id` int(11) NOT NULL,
+  `Note` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `termine`
+--
+
+INSERT INTO `termine` (`termine_id`, `bezeichnung`, `Fach`, `datum`, `kommentar`, `user_id`, `Note`) VALUES
+(1, 'Klausur', 'AE', '2004-10-20', NULL, 8, 1),
+(2, 'Klausur', 'FE', '2004-10-20', NULL, 8, 1),
+(3, 'Klausur', 'AE', '2004-10-20', NULL, 8, 2),
+(4, 'Klausur', 'FE', '2004-10-20', NULL, 8, 1),
+(5, 'Klausur', 'AE', '2004-10-20', NULL, 8, 2),
+(6, 'Klausur', 'FE', '2004-10-20', NULL, 8, 1),
+(7, 'Klausur', 'AE', '2004-10-20', NULL, 8, 2),
+(8, 'Klausur', 'WuG', '2004-10-20', NULL, 8, NULL),
+(9, 'Klausur', 'AE', '2004-10-20', NULL, 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -98,14 +119,15 @@ CREATE TABLE IF NOT EXISTS `termine` (
 -- Tabellenstruktur für Tabelle `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(11) NOT NULL,
-  `first_name` text CHARACTER SET utf8 NOT NULL,
-  `last_name` text CHARACTER SET utf8 NOT NULL,
-  `password` varchar(128) NOT NULL,
+  `first_name` text NOT NULL,
+  `last_name` text NOT NULL,
+  `password` varchar(128) CHARACTER SET latin1 NOT NULL,
   `beruf_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `user`
@@ -171,7 +193,7 @@ ALTER TABLE `stundenplan`
 -- AUTO_INCREMENT für Tabelle `termine`
 --
 ALTER TABLE `termine`
-  MODIFY `termine_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `termine_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT für Tabelle `user`
 --
