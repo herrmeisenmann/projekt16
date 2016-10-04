@@ -13,10 +13,10 @@ namespace Client.Controllers
         {
             return View();
         }
-        public JsonResult selectUser()
-        {
-            JsonResult result = Repository.ClientRepo.SelectAll();
-            return result;
-        }
+        //public JsonResult selectUser()
+        //{
+        //    JsonResult result = Repository.ClientRepo.SelectAll();
+        //    return result;
+        //}
     }
 }

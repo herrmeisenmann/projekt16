@@ -6,56 +6,81 @@ function showWidget(component){
     var window = $("#"+component).data("kendoWindow");
     window.open();
 }
-    var dataSource = new kendo.data.DataSource({
-        data: [ { productName: "Tea", category: "Beverages" },
-            { productName: "Coffee", category: "Beverages" },
-            { productName: "Ham", category: "Food" },
-            { productName: "Bread", category: "Food" }
+function termineGrid(){
+    var termineDataSource = new kendo.data.DataSource({
+        data: [ { Termin: "Klausur", Fach: "AE", Datum: "06.10.2016", Kommentar: "", Note: ""},
+            { Termin: "Klausur", Fach: "FE", Datum: "04.10.2016", Kommentar: "", Note: "2" },
+            { Termin: "Präsentation", Fach: "OuG", Datum: "07.10.2016", Kommentar: "", Note: "" },
+            { Termin: "Präsentation", Fach: "WuG", Datum: "01.10.2016", Kommentar: "", Note: "1" }
         ]
     });
-function init() {
     $("#termineGrid").kendoGrid({
         autoBind: false,
-        dataSource: dataSource,
-        width: 400
+        dataSource: termineDataSource
     });
-
-    dataSource.read();
-
-// initialize the widget
+}
+function kendoWidgets() {
+    // initialize the widgets
     $("#stundenplan").kendoWindow({
-        title: "Stundenplan",
-        id: "test"
+        title: "Stundenplan"
     });
+    //var stundenplanWindow = $("#stundenplan").data("kendoWindow");
+    //var stundenplanWindowWrapper = stundenplanWindow.wrapper;
+    //stundenplanWindowWrapper.addClass("stundenplanWindow");
+
     $("#userinfo").kendoWindow({
         title: "User Infos"
     });
+    //var userinfoWindow = $("#userinfo").data("kendoWindow");
+    //var userinfoWindowWrapper = userinfoWindow.wrapper;
+    //userinfoWindowWrapper.addClass("userinfoWindow");
+
     $("#termine").kendoWindow({
         title: "Termine"
     });
+    //var termineWindow = $("#termine").data("kendoWindow");
+    //var termineWindowWrapper = termineWindow.wrapper;
+    //termineWindowWrapper.addClass("termineWindow");
+
     $("#infoIHK").kendoWindow({
         title: "Prüfungstermine und infos"
     });
+    //var infoIHKWindow = $("#infoIHK").data("kendoWindow");
+    //var infoIHKWindowWrapper = infoIHKWindow.wrapper;
+    //infoIHKWindowWrapper.addClass("infoIHKWindow");
+
     $("#new").kendoWindow({
         title: "Folgt..."
     });
+    //var newWindow = $("#new").data("kendoWindow");
+    //var newWindowWrapper = newWindow.wrapper;
+    //newWindowWrapper.addClass("newWindow");
+
     $("#chat").kendoWindow({
         title: "Klassenchat"
     });
+    //var chatWindow = $("#chat").data("kendoWindow");
+    //var chatWindowWrapper = chatWindow.wrapper;
+    //chatWindowWrapper.addClass("chatWindow");
+
     $("#menu").kendoMenu({
         animation: { open: { effects: "fadeIn" } }
     });
-    
+
     //Anordnen der Widgets
     $("#stundenplan").closest(".k-window").css({
         top: "20%",
         left: "20%"
+        //"grid-column-start": 1,
+        //"grid-column-end": line3,
+        //"grid-row-start": row1-start,
+        //"grid-row-end": 2
     });
     $("#userinfo").closest(".k-window").css({
         top: "20%",
         left: "40%"
     });
-    
+
     $("#new").closest(".k-window").css({
         top: "20%",
         left: "60%"
@@ -74,7 +99,10 @@ function init() {
         left: "20%",
         width: "60%"
     });
-    
+}
+function init() {
+    termineGrid();
+    kendoWidgets();
 }
 $( document ).ready(function(){
     init();
