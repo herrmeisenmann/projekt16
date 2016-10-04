@@ -2,16 +2,20 @@
     ViewBag.Title = "Schüler Informationstool (SIT)";
 }
 
-<h1>my first page</h1>
-<ul id="menu">
-    <li onclick="showWidget('stundenplan')">Stundenplan</li>
-    <li onclick="showWidget('userinfo')">Steckbrief</li>
-    <li onclick="showWidget('infoIHK')">Prüfunginfos</li>
-    <li onclick="showWidget('new')">Folgt..</li>
-    <li onclick="showWidget('termine')">Terminliste</li>
-</ul>
-<div class="gridlayout">
-    <div id="stundenplan">hier kommt der Sundenplan rein...</div>
+<div id="top">
+    <h1>my first page</h1>
+    <ul id="menu">
+        <li onclick="showWidget('stundenplan')">Stundenplan</li>
+        <li onclick="showWidget('userinfo')">Steckbrief</li>
+        <li onclick="showWidget('infoIHK')">Prüfunginfos</li>
+        <li onclick="showWidget('new')">Folgt..</li>
+        <li onclick="showWidget('termine')">Terminliste</li>
+    </ul>
+</div>
+<div id="content">
+    <div id="stundenplan">hier kommt der Sundenplan rein...
+        <div id="stundenplanImg"></div>
+    </div>
     <div id="userinfo">
         <ul class="fieldlist">
             <li>

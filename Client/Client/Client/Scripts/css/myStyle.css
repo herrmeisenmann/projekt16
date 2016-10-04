@@ -29,7 +29,10 @@
     top: 80%;
     width: 20%;
 }*/
-
+footer{
+    position: fixed;
+    bottom: 0;
+}
 .fieldlist {
     margin: 0 0 -2em;
     padding: 0;

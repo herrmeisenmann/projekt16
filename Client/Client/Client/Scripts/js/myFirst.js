@@ -18,6 +18,11 @@ function termineGrid(){
         autoBind: false,
         dataSource: termineDataSource
     });
+    termineDataSource.read();
+    //termineDataSource.fetch(function () {
+    //    var janeDoe = termineDataSource.at(0);
+    //    console.log(janeDoe.Termin); // displays "Jane Doe"
+    //});
 }
 function kendoWidgets() {
     // initialize the widgets
@@ -100,9 +105,25 @@ function kendoWidgets() {
         width: "60%"
     });
 }
+function getImgByClass() {
+    $.ajax({
+        type: 'POST',
+        url: 'Client/getStundenplanImage',
+        async: false,
+        success: function (Image) {
+            if (Image != '') {
+                debugger;
+                var oImg = document.createElement("img");
+                oImg.setAttribute('src', 'data:image/png;base64,' + Image.Image);
+                $("#stundenplanImg").append(oImg);
+            }
+        }
+    })
+}
 function init() {
     termineGrid();
     kendoWidgets();
+    getImgByClass();
 }
 $( document ).ready(function(){
     init();
