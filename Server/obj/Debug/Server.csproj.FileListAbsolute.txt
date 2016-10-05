@@ -6,3 +6,10 @@ C:\projects\projekt16\Server\bin\Debug\MySql.Data.dll
 C:\projects\projekt16\Server\obj\Debug\Server.exe
 C:\projects\projekt16\Server\obj\Debug\Server.pdb
 C:\projects\projekt16\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\GitProjects\projekt16\server\bin\Debug\Server.exe.config
+C:\GitProjects\projekt16\server\obj\Debug\Server.exe
+C:\GitProjects\projekt16\server\obj\Debug\Server.pdb
+C:\GitProjects\projekt16\server\bin\Debug\Server.exe
+C:\GitProjects\projekt16\server\bin\Debug\Server.pdb
+C:\GitProjects\projekt16\server\bin\Debug\MySql.Data.dll
+C:\GitProjects\projekt16\server\obj\Debug\Server.csprojResolveAssemblyReference.cache

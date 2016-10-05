@@ -23,7 +23,7 @@ namespace Server
             server = "localhost";
             database = "sit_project";
             user = "root";
-            password = "root";
+            password = "start123";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "user=" + user + ";" + "PASSWORD=" + password + ";";
