@@ -99,3 +99,13 @@ G:\gitProjects\projekt16\Client\Client\Client\bin\de\Microsoft.Owin.Security.Mic
 G:\gitProjects\projekt16\Client\Client\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
 G:\gitProjects\projekt16\Client\Client\Client\obj\Debug\Client.dll
 G:\gitProjects\projekt16\Client\Client\Client\obj\Debug\Client.pdb
+G:\gitProjects\projekt16\Client\Client\Client\bin\MySql.Data.dll
+G:\gitProjects\projekt16\Client\Client\Client\bin\MySql.Data.Entity.EF6.dll
+G:\gitProjects\projekt16\Client\Client\Client\bin\MySql.Web.dll
+G:\gitProjects\projekt16\Client\Client\Client\bin\WebMatrix.WebData.dll
+G:\gitProjects\projekt16\Client\Client\Client\bin\WebMatrix.Data.dll
+G:\gitProjects\projekt16\Client\Client\Client\bin\MySql.Data.Entity.EF6.xml
+G:\gitProjects\projekt16\Client\Client\Client\bin\WebMatrix.WebData.xml
+G:\gitProjects\projekt16\Client\Client\Client\bin\WebMatrix.Data.xml
+G:\gitProjects\projekt16\Client\Client\Client\bin\de\WebMatrix.WebData.resources.dll
+G:\gitProjects\projekt16\Client\Client\Client\bin\de\WebMatrix.Data.resources.dll

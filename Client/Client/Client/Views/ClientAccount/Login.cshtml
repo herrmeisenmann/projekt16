@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<div class="form-group">
+    <lable class="col-md-2 control-label" for="login_firstname">Vorname: </lable>
+    <div class="col-md-10">
+        <input class="k-textbox" id="login_firstname" />
+    </div>
+</div>
+<div class="form-group">
+    <lable class="col-md-2 control-label" for="login_lastname">Nachname: </lable>
+    <div class="col-md-10">
+        <input class="k-textbox" id="login_lastname" />
+    </div>
+</div>
+<div class="form-group">
+    <lable class="col-md-2 control-label" for="login_password">Password: </lable>
+    <div class="col-md-10">
+        <input class="k-textbox" id="login_password" />
+    </div>
+</div><br />
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" id="login_submit" class="btn btn-default" value="Einloggen" />
+    </div>
+</div>
+
+@section scripts
+{
+    <link rel="stylesheet" href="~/Scripts/KendoUI/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="~/Scripts/KendoUI/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="~/Scripts/KendoUI/styles/kendo.default.mobile.min.css" />
+
+    <script src="~/Scripts/KendoUI/js/jquery.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.all.min.js"></script>
+    <link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="~/Scripts/js/ClientAccount.js"></script>
+    <link href="~/Scripts/css/Client.css" rel="stylesheet">
+}
+
+

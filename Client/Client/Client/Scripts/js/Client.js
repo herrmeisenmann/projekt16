@@ -6,37 +6,8 @@ function showWidget(component){
     var window = $("#"+component).data("kendoWindow");
     window.open();
 }
-    var dataSource = new kendo.data.DataSource({
-        data: [ { productName: "Tea", category: "Beverages" },
-            { productName: "Coffee", category: "Beverages" },
-            { productName: "Ham", category: "Food" },
-            { productName: "Bread", category: "Food" }
-        ]
-    });
-    function userInfo() {
-        var id = 8;
-        var result;
-        //Niklas
-        $.ajax({
-            url: "/Client/getUserById?id=" + id,
-            success: function (data) {
-                console.log(data);
-                $("#firstname").text(data.firstname)
-                $("#lastname").text(data.lastname)
-            }
-        });
-}
-    function init() {
-        userInfo();
-    $("#termineGrid").kendoGrid({
-        autoBind: false,
-        dataSource: dataSource,
-        width: 400
-    });
-
-    dataSource.read();
-
-// initialize the widget
+function kendoWindows() {
+    // initialize the widget
     $("#stundenplan").kendoWindow({
         title: "Stundenplan",
         id: "test"
@@ -59,7 +30,7 @@ function showWidget(component){
     $("#menu").kendoMenu({
         animation: { open: { effects: "fadeIn" } }
     });
-    
+
     //Anordnen der Widgets
     $("#stundenplan").closest(".k-window").css({
         top: "20%",
@@ -69,7 +40,7 @@ function showWidget(component){
         top: "20%",
         left: "40%"
     });
-    
+
     $("#new").closest(".k-window").css({
         top: "20%",
         left: "60%"
@@ -88,7 +59,73 @@ function showWidget(component){
         left: "20%",
         width: "60%"
     });
-    
+}
+function termineGrid() {
+    //Niklas
+    var id = 8;
+    //var dataSource = new kendo.data.DataSource({
+    //    data: [{ productName: "Tea", category: "Beverages" },
+    //        { productName: "Coffee", category: "Beverages" },
+    //        { productName: "Ham", category: "Food" },
+    //        { productName: "Bread", category: "Food" }
+    //    ]
+    //});
+    var appointmentsDataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "/Client/getAppointmentsByUserId=id=" + id,
+                dataType: "json"
+            }
+        }
+    })
+    $("#termineGrid").kendoGrid({
+        dataSource: appointmentsDataSource
+    });
+}
+function userInfo() {
+        //Niklas
+    var id = 8;
+    var class_id = 0;
+    var profession_id = 0;
+        $.ajax({
+            url: "/Client/getUserById?id=" + id,
+            success: function (data) {
+                console.log(data);
+                $("#firstname").text(data.firstname)
+                $("#lastname").text(data.lastname)
+                class_id = data.class_id;
+                profession_id = data.profession_id;
+            }
+        });
+        if (class_id > 0) {
+            $.ajax({
+                url: "/Client/getClassById?id=" + class_id,
+                success: function (data) {
+                    console.log(data);
+                    $("#class").text(data.name)
+                }
+            });
+        }
+        else {
+            alert("Fehler in JavaScript:\n Klasse des Schülers konnte nicht geladen werden!\n class_id = " + class_id);
+        }
+        if (profession_id > 0) {
+            $.ajax({
+                url: "/Client/getProfessionById?id=" + profession_id,
+                success: function (data) {
+                    console.log(data);
+                    $("#profession").text(data.name)
+                }
+            });
+        }
+        else {
+            alert("Fehler in JavaScript:\n Beruf des Schülers konnte nicht geladen werden!\n profession_id = " + class_id);
+        }
+}
+    function init() {
+        userInfo();
+        termineGrid();
+        kendoWindows();
 }
 $( document ).ready(function(){
     init();

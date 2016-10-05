@@ -24,5 +24,23 @@ namespace Client.Controllers
             User user = server.GetUserById(id);
             return Json(user, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult getClassById(int id)
+        {
+            ServiceClient server = new ServiceClient();
+            Classroom classroom = server.GetClassById(id);
+            return Json(classroom, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getProfessionById(int id)
+        {
+            ServiceClient server = new ServiceClient();
+            Profession profession = server.GetProfessionById(id);
+            return Json(profession, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getAppointmentsByUserId(int id)
+        {
+            ServiceClient server = new ServiceClient();
+            List<Appointment> appointments = server.GetAppointmentsByUserId(id);
+            return Json(appointments, JsonRequestBehavior.AllowGet);
+        }
     }
 }

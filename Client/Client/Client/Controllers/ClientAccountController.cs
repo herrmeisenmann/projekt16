@@ -15,11 +15,34 @@ namespace Client.Views.ClientAccount
         {
             return View();
         }
-        public JsonResult getClassesJson()
+        public ActionResult Login()
+        {
+            return View();
+        }
+        public JsonResult getClasses()
         {
             ServiceClient server = new ServiceClient();
             List<Classroom> list = server.GetAllClasses();
             return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getProfessions()
+        {
+            ServiceClient server = new ServiceClient();
+            List<Profession> list = server.GetAllProfessions();
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        public String saveUser(string firstname, string lastname, string password, int profession_id, int class_id)
+        {
+            ServiceClient server = new ServiceClient();
+            bool save = server.InsertUser(firstname, lastname, password, profession_id, class_id);
+            if (save == true) {
+                return "User wurde gespeichert!";
+            }
+            else
+            {
+                return "User wurde nicht gespeichert!";
+            }
+            
         }
     }
 }
