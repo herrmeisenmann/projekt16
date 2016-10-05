@@ -11,16 +11,15 @@ namespace Client.Views.ClientAccount
     public class ClientAccountController : Controller
     {
         // GET: ClientAccount
-        public ActionResult Index()
+        public ActionResult Register()
         {
             return View();
         }
-        public String getClassesJson()
+        public JsonResult getClassesJson()
         {
             ServiceClient server = new ServiceClient();
             List<Classroom> list = server.GetAllClasses();
-            var json = JsonConvert.SerializeObject(list);
-            return json;
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
     }
 }

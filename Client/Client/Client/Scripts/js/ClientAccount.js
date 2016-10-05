@@ -1,17 +1,16 @@
-﻿function kendoElements(){
-    var klassenDataSource = new kendo.data.DataSource({
-        transport:{
-            read:{
-                url: "/ClientAccount/getClassesJson",
-                dataType: "json"
-            }
+﻿var classesDataSource;
+
+function kendoElements(){
+    $.ajax({
+        url: "/ClientAccount/getClassesJson",
+        success: function (data) {
+            console.log(data);
+            classesDataSource = data;
         }
-    })
-    $("#klassenDropDown").kendoDropDownList({
-        dataSource: klassenDataSource
     });
-    klassenDataSource.read();
-    console.log(klassenDataSource);
+    $("#klassenDropDown").kendoDropDownList({
+        dataSource: classesDataSource
+    });
 }
 function init() {
     kendoElements();
