@@ -13,28 +13,47 @@
   <xs:element name="User" nillable="true" type="tns:User" />
   <xs:complexType name="Classroom">
     <xs:sequence>
-      <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="timetable_id" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Classroom" nillable="true" type="tns:Classroom" />
   <xs:complexType name="Profession">
     <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Profession" nillable="true" type="tns:Profession" />
-  <xs:complexType name="UserSchedule">
+  <xs:complexType name="ArrayOfAppointment">
     <xs:sequence>
-      <xs:element minOccurs="0" name="appointment" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Appointment" nillable="true" type="tns:Appointment" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="UserSchedule" nillable="true" type="tns:UserSchedule" />
+  <xs:element name="ArrayOfAppointment" nillable="true" type="tns:ArrayOfAppointment" />
+  <xs:complexType name="Appointment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="grade" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Appointment" nillable="true" type="tns:Appointment" />
   <xs:complexType name="ArrayOfClassroom">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Classroom" nillable="true" type="tns:Classroom" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfClassroom" nillable="true" type="tns:ArrayOfClassroom" />
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
 </xs:schema>

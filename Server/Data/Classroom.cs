@@ -11,14 +11,17 @@ namespace Server.Data
     public class Classroom
     {
         [DataMember]
-        private string name;
+        public int id;
         [DataMember]
-        private string description;
+        public string name;
+        [DataMember]
+        public int timetable_id;
 
-        public Classroom(string name, string description)
+        public Classroom(int id, string name, int timetable_id)
         {
+            this.id = id;
             this.name = name;
-            this.description = description;
+            this.timetable_id = timetable_id;
         }
     }
 }

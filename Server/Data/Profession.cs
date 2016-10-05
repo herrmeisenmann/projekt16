@@ -11,10 +11,13 @@ namespace Server.Data
     public class Profession
     {
         [DataMember]
-        private string name;
+        public int id;
+        [DataMember]
+        public string name;
 
-        public Profession(string name)
+        public Profession(int id, string name)
         {
+            this.id = id;
             this.name = name;
         }
     }

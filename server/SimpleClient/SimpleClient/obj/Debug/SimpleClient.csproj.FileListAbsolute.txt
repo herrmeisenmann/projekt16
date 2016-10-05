@@ -4,3 +4,5 @@ C:\projects\projekt16\SimpleClient\SimpleClient\bin\Debug\SimpleClient.pdb
 C:\projects\projekt16\SimpleClient\SimpleClient\obj\Debug\SimpleClient.csprojResolveAssemblyReference.cache
 C:\projects\projekt16\SimpleClient\SimpleClient\obj\Debug\SimpleClient.exe
 C:\projects\projekt16\SimpleClient\SimpleClient\obj\Debug\SimpleClient.pdb
+C:\projects\projekt16\SimpleClient\SimpleClient\bin\Debug\Newtonsoft.Json.dll
+C:\projects\projekt16\SimpleClient\SimpleClient\bin\Debug\Newtonsoft.Json.xml
