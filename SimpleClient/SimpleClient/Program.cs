@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SimpleClient.ServiceReference1;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,13 +14,26 @@ namespace SimpleClient
         static void Main(string[] args)
         {
             ServiceReference1.ServiceClient client = new ServiceReference1.ServiceClient();
-            var fileStream = new FileStream("C:\\test\\hallo.png", FileMode.Create, FileAccess.Write);
+            User user = client.GetUserById(9);
+            Classroom classroom = client.GetClassByUserId(8);
             
+            //while(true)
+            //{
+            //    String[] chat = client.GetChatMessages(3);
+            //    foreach(var message in chat)
+            //    {
+            //        Console.WriteLine(message);
+            //    }
+            //    client.WriteToChat("Jonas", Console.ReadLine());
+            //}
             
-            Stream test = client.GetClassScheduleById(1);
-            test.CopyTo(fileStream);
-            fileStream.Dispose();
+            //var fileStream = new FileStream("C:\\test\\hallo.png", FileMode.Create, FileAccess.Write);
 
+
+            //Stream test = client.GetClassScheduleById(1);
+            //test.CopyTo(fileStream);
+            //fileStream.Dispose();
+            Console.ReadKey();
         }
     }
 }

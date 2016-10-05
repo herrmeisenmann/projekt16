@@ -11,17 +11,17 @@ namespace Server.Data
     public class User
     {
         [DataMember]
-        private int id;
+        public int id;
         [DataMember]
-        private string firstname;
+        public string firstname;
         [DataMember]
-        private string lastname;
+        public string lastname;
         [DataMember]
-        private string password;
+        public string password;
         [DataMember]
-        private Profession profession;
+        public Profession profession;
         [DataMember]
-        private Classroom classroom;
+        public Classroom classroom;
 
         
         public User(int id, string firstname, string lastname, string password, Profession profession, Classroom classroom)
@@ -40,8 +40,8 @@ namespace Server.Data
             this.firstname = firstname;
             this.lastname = lastname;
             this.password = password;
-            this.profession = new Profession("NA");
-            this.classroom = new Classroom("NA", "Descr. NA");
+            this.profession = new Profession(1, "NA");
+            this.classroom = new Classroom(1, "NA", 1);
         }
 
     }
