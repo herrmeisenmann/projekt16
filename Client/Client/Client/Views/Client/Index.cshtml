@@ -10,17 +10,23 @@
     <li onclick="showWidget('new')">Folgt..</li>
     <li onclick="showWidget('termine')">Terminliste</li>
 </ul>
+    <div id="stundenplan">hier kommt der Sundenplan rein...</div>
 
-            <div id="stundenplan">hier kommt der Sundenplan rein...</div>
-            <div id="userinfo">hier kommen infos über den schüler rein...</div>
-            <div id="infoIHK">hier kommen infos über die ihk rein...</div>
-            <div id="new">Irgendwas</div>
-            <div id="termine">
-                hier kommt eine termin tabelle rein
-                <div id="termineGrid"></div>
-            </div>
-            <div id="chat">Hier kommt der Chat rein...</div>
+    <div id="userinfo">
+        <label for="firstname">Vorname: </label>
+        <span id="firstname"></span>
+        <br />
+        <label for="lastname">Nachnahme:</label>
+        <span id="lastname"></span>
+    </div>
 
+    <div id="infoIHK">hier kommen infos über die ihk rein...</div>
+    <div id="new">Irgendwas</div>
+    <div id="termine">
+        hier kommt eine termin tabelle rein
+        <div id="termineGrid"></div>
+    </div>
+    <div id="chat">Hier kommt der Chat rein...</div>
 @section scripts
 {
     <link rel="stylesheet" href="~/Scripts/KendoUI/styles/kendo.common.min.css" />
@@ -30,7 +36,7 @@
     <script src="~/Scripts/KendoUI/js/jquery.min.js"></script>
     <script src="~/Scripts/KendoUI/js/kendo.all.min.js"></script>
     <link href="~/Scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="~/Scripts/js/myFirst.js"></script>
-    <link href="~/Scripts/css/myStyle.css" rel="stylesheet" >
+    <script src="~/Scripts/js/Client.js"></script>
+    <link href="~/Scripts/css/Client.css" rel="stylesheet" >
 }
 

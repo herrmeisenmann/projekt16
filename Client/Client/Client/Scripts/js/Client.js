@@ -13,7 +13,21 @@ function showWidget(component){
             { productName: "Bread", category: "Food" }
         ]
     });
-function init() {
+    function userInfo() {
+        var id = 8;
+        var result;
+        //Niklas
+        $.ajax({
+            url: "/Client/getUserById?id=" + id,
+            success: function (data) {
+                console.log(data);
+                $("#firstname").text(data.firstname)
+                $("#lastname").text(data.lastname)
+            }
+        });
+}
+    function init() {
+        userInfo();
     $("#termineGrid").kendoGrid({
         autoBind: false,
         dataSource: dataSource,
