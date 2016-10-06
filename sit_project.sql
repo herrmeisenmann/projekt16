@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 04. Okt 2016 um 13:25
+-- Erstellungszeit: 06. Okt 2016 um 18:02
 -- Server-Version: 5.6.24
 -- PHP-Version: 5.6.8
 
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `sit_project`
 --
-CREATE DATABASE IF NOT EXISTS `sit_project` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `sit_project` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `sit_project`;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `beruf`
+-- Tabellenstruktur fÃ¼r Tabelle `beruf`
 --
 
 DROP TABLE IF EXISTS `beruf`;
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `beruf` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Daten für Tabelle `beruf`
+-- Daten fÃ¼r Tabelle `beruf`
 --
 
 INSERT INTO `beruf` (`beruf_id`, `bezeichnung`) VALUES
@@ -45,34 +45,30 @@ INSERT INTO `beruf` (`beruf_id`, `bezeichnung`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `class`
+-- Tabellenstruktur fÃ¼r Tabelle `class`
 --
 
 DROP TABLE IF EXISTS `class`;
 CREATE TABLE IF NOT EXISTS `class` (
   `class_id` int(11) NOT NULL,
-  `bezeichnung` text NOT NULL,
-  `stundenplan_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  `bezeichnung` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `stundenplan_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Daten für Tabelle `class`
+-- Daten fÃ¼r Tabelle `class`
 --
 
 INSERT INTO `class` (`class_id`, `bezeichnung`, `stundenplan_id`) VALUES
-(7, 'IT4a', NULL),
-(8, 'IT4b', NULL),
-(9, 'IT4c', NULL),
-(10, 'IT4d', NULL),
-(11, 'IT4e', NULL),
-(12, 'IT4f', NULL),
-(13, 'IT4g', NULL),
-(14, 'IT4h', NULL);
+(1, 'IT4a', 1),
+(2, 'IT4a', 1),
+(3, 'IT5a', 2),
+(4, 'Trinkverein Wilhelmsburg', 3);
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `stundenplan`
+-- Tabellenstruktur fÃ¼r Tabelle `stundenplan`
 --
 
 DROP TABLE IF EXISTS `stundenplan`;
@@ -84,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `stundenplan` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `termine`
+-- Tabellenstruktur fÃ¼r Tabelle `termine`
 --
 
 DROP TABLE IF EXISTS `termine`;
@@ -96,10 +92,10 @@ CREATE TABLE IF NOT EXISTS `termine` (
   `kommentar` longtext CHARACTER SET latin1,
   `user_id` int(11) NOT NULL,
   `Note` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
--- Daten für Tabelle `termine`
+-- Daten fÃ¼r Tabelle `termine`
 --
 
 INSERT INTO `termine` (`termine_id`, `bezeichnung`, `Fach`, `datum`, `kommentar`, `user_id`, `Note`) VALUES
@@ -110,95 +106,100 @@ INSERT INTO `termine` (`termine_id`, `bezeichnung`, `Fach`, `datum`, `kommentar`
 (5, 'Klausur', 'AE', '2004-10-20', NULL, 8, 2),
 (6, 'Klausur', 'FE', '2004-10-20', NULL, 8, 1),
 (7, 'Klausur', 'AE', '2004-10-20', NULL, 8, 2),
-(8, 'Klausur', 'WuG', '2004-10-20', NULL, 8, NULL),
-(9, 'Klausur', 'AE', '2004-10-20', NULL, 8, NULL);
+(8, 'Klausur', 'WuG', '2004-10-20', NULL, 8, 2),
+(9, 'Klausur', 'AE', '2004-10-20', NULL, 8, 3),
+(10, 'Hallo', 'Fach', '2016-10-05', 'Kommentar', 9, 1),
+(11, 'Hallo', 'Fach', '2016-10-05', 'Kommentar', 9, 1),
+(12, 'Hallo2', 'Fach', '2016-10-05', 'Kommentar', 9, 5);
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `user`
+-- Tabellenstruktur fÃ¼r Tabelle `user`
 --
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(11) NOT NULL,
+  `username` varchar(45) NOT NULL,
   `first_name` text NOT NULL,
   `last_name` text NOT NULL,
   `password` varchar(128) CHARACTER SET latin1 NOT NULL,
   `beruf_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
--- Daten für Tabelle `user`
+-- Daten fÃ¼r Tabelle `user`
 --
 
-INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `password`, `beruf_id`, `class_id`) VALUES
-(8, 'Niklas', 'Grieger', 'start123', 7, 1);
+INSERT INTO `user` (`user_id`, `username`, `first_name`, `last_name`, `password`, `beruf_id`, `class_id`) VALUES
+(8, 'NiGri', 'Niklas', 'Grieger', 'start123', 1, 1),
+(9, 'JoKra', 'Jonas', 'Krahl', '123yxc', 1, 1);
 
 --
 -- Indizes der exportierten Tabellen
 --
 
 --
--- Indizes für die Tabelle `beruf`
+-- Indizes fÃ¼r die Tabelle `beruf`
 --
 ALTER TABLE `beruf`
   ADD PRIMARY KEY (`beruf_id`);
 
 --
--- Indizes für die Tabelle `class`
+-- Indizes fÃ¼r die Tabelle `class`
 --
 ALTER TABLE `class`
-  ADD PRIMARY KEY (`class_id`), ADD KEY `fk_stundenplan` (`stundenplan_id`);
+  ADD PRIMARY KEY (`class_id`), ADD UNIQUE KEY `class_id_UNIQUE` (`class_id`);
 
 --
--- Indizes für die Tabelle `stundenplan`
+-- Indizes fÃ¼r die Tabelle `stundenplan`
 --
 ALTER TABLE `stundenplan`
   ADD PRIMARY KEY (`stundenplan_id`);
 
 --
--- Indizes für die Tabelle `termine`
+-- Indizes fÃ¼r die Tabelle `termine`
 --
 ALTER TABLE `termine`
   ADD PRIMARY KEY (`termine_id`), ADD KEY `user_fk` (`user_id`);
 
 --
--- Indizes für die Tabelle `user`
+-- Indizes fÃ¼r die Tabelle `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`), ADD KEY `fk_class` (`class_id`), ADD KEY `fk_beruf` (`beruf_id`);
+  ADD PRIMARY KEY (`user_id`), ADD UNIQUE KEY `username_UNIQUE` (`username`), ADD KEY `fk_class` (`class_id`), ADD KEY `fk_beruf` (`beruf_id`);
 
 --
--- AUTO_INCREMENT für exportierte Tabellen
+-- AUTO_INCREMENT fÃ¼r exportierte Tabellen
 --
 
 --
--- AUTO_INCREMENT für Tabelle `beruf`
+-- AUTO_INCREMENT fÃ¼r Tabelle `beruf`
 --
 ALTER TABLE `beruf`
   MODIFY `beruf_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT für Tabelle `class`
+-- AUTO_INCREMENT fÃ¼r Tabelle `class`
 --
 ALTER TABLE `class`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT für Tabelle `stundenplan`
+-- AUTO_INCREMENT fÃ¼r Tabelle `stundenplan`
 --
 ALTER TABLE `stundenplan`
   MODIFY `stundenplan_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT für Tabelle `termine`
+-- AUTO_INCREMENT fÃ¼r Tabelle `termine`
 --
 ALTER TABLE `termine`
-  MODIFY `termine_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `termine_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT für Tabelle `user`
+-- AUTO_INCREMENT fÃ¼r Tabelle `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
