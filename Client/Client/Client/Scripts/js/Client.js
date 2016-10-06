@@ -2,6 +2,9 @@
  * Created by Nik on 27.09.2016.
  */
 var schedule_id = 0;
+var user_id = 0;
+var appointmentsDataSource = null;
+var newAppointmentWindow;
 function showWidget(component){
     //$("#"+component).removeAttr("display");
     var window = $("#"+component).data("kendoWindow");
@@ -76,7 +79,7 @@ function termineGrid() {
     //        { productName: "Bread", category: "Food" }
     //    ]
     //});
-    var appointmentsDataSource = new kendo.data.DataSource({
+    appointmentsDataSource = new kendo.data.DataSource({
         transport: {
             read: {
                 url: "/Client/getAppointmentsByUserId?id=" + id,
@@ -84,10 +87,6 @@ function termineGrid() {
             }
         }
     })
-    $("#newAppointment").kendoWindow({
-        title: "Neuer Termin",
-        visible: false
-    });
     $("#termineGrid").kendoGrid({
         dataSource: appointmentsDataSource,
         columns: [
@@ -101,7 +100,8 @@ function termineGrid() {
             },
             {
                 field: "date",
-                title: "Datum"
+                title: "Datum",
+                template: '#= kendo.toString(kendo.parseDate(date, "dd.MM.yyyy" ), "dd.MM.yyyy" )#'
             },
             {
                 field: "comment",
@@ -127,25 +127,61 @@ function userInfo() {
                 $("#class").text(data.classroom.name);
                 $("#profession").text(data.profession.name);
                 schedule_id = data.classroom.timetable_id;
+                user_id = data.id;
                 console.log("Timetable_id: " + data.classroom.timetable_id);
-            }
+            },
+            async: false //setzen, sonst können keine Variablen gesetzt werden
         });
 }
 function getSchedule() {
     console.log("Schedule_id: " + schedule_id);
     $.ajax({
-        url: "/Client/getSchedule?id=" + 1,
+        url: "/Client/getSchedule?id=" + schedule_id,
         success: function (data) {
             $('#schedule').attr('src', data);
         }
     });
 }
-    function init() {
+function newAppointment() {
+    $("#newAppointmentWindow").kendoWindow({
+        title: "Stundenplan",
+        content: {
+            url: "Client/_newAppointmentPartialView"
+        }
+    });
+    newAppointmentWindow = $("#newAppointmentWindow").data("kendoWindow");
+    //$('#appoint_date').data('kendoDatePicker').enable(true);
+    newAppointmentWindow.open();
+}
+function saveAppointment() {
+    var user_idVal = user_id;
+    console.log("user_idVal: " + user_idVal);
+    var termintypVal = $("#appoint_termintyp").val();
+    var commentVal = $("#appoint_comment").val();
+    var dateVal = $("#appoint_date").val();
+    var subjectVal = $("#appoint_subject").val();
+    var gradeVal = $("#appoint_grad").val();
+    var dataString = 'userId=' + user_idVal + '&name=' + termintypVal + '&comment=' + commentVal + '&date=' + dateVal + '&subject=' + subjectVal + '&grade=' + gradeVal;
+    console.log("saveAppointment: " + dataString)
+    $.ajax({
+        type: 'POST',
+        data: dataString,
+        url: '/Client/saveAppointment',
+        success: function (data) {
+            alert(data);
+            appointmentsDataSource.read();
+            newAppointmentWindow.close();
+        }
+    });
+
+}
+function init() {
+        
         userInfo();
-        getSchedule();
+        //getSchedule();
         termineGrid();
         kendoWindows();
 }
-$( document ).ready(function(){
+$(document).ready(function () {
     init();
 });

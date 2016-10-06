@@ -20,6 +20,10 @@ namespace Client.Controllers
         {
             return View();
         }
+        public ActionResult _newAppointmentPartialView()
+        {
+            return View();
+        }
         public JsonResult getUserById(int id)
         {
             ServiceClient server = new ServiceClient();
@@ -38,11 +42,11 @@ namespace Client.Controllers
             bool save = server.InsertUserAppointment(userId, name, comment, date, subject, grade);
             if (save == true)
             {
-                return "User wurde gespeichert!";
+                return "Termin wurde gespeichert!";
             }
             else
             {
-                return "User wurde nicht gespeichert!";
+                return "Termin wurde nicht gespeichert!";
             }
 
         }
