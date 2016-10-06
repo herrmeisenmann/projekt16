@@ -19,20 +19,17 @@ namespace Server.Data
         [DataMember]
         public string lastname;
         [DataMember]
-        public string password;
-        [DataMember]
         public Profession profession;
         [DataMember]
         public Classroom classroom;
 
         
-        public User(int id, string username, string firstname, string lastname, string password, Profession profession, Classroom classroom)
+        public User(int id, string username, string firstname, string lastname, Profession profession, Classroom classroom)
         {
             this.id = id;
             this.username = username;
             this.firstname = firstname;
             this.lastname = lastname;
-            this.password = password;
             this.profession = profession;
             this.classroom = classroom;
         }

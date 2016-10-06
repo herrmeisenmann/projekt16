@@ -71,14 +71,14 @@ namespace Server
         }
         public User GetUserById(int id)
         {
-            string query = $"SELECT user.user_id, user.username, user.first_name, user.last_name, user.password, class.class_id, class.bezeichnung as classname, class.stundenplan_id, beruf.beruf_id, beruf.bezeichnung as professionname FROM  user join class on class.class_id = user.class_id join beruf on beruf.beruf_id = user.beruf_id where user.user_id = {id};";
+            string query = $"SELECT user.user_id, user.username, user.first_name, user.last_name, class.class_id, class.bezeichnung as classname, class.stundenplan_id, beruf.beruf_id, beruf.bezeichnung as professionname FROM  user join class on class.class_id = user.class_id join beruf on beruf.beruf_id = user.beruf_id where user.user_id = {id};";
 
             return GetUser(query);
         }
 
         public User GetUserByName(string username)
         {
-            string query = $"SELECT user.user_id, user.username, user.first_name, user.last_name, user.password, class.class_id, class.bezeichnung as classname, class.stundenplan_id, beruf.beruf_id, beruf.bezeichnung as professionname FROM  user join class on class.class_id = user.class_id join beruf on beruf.beruf_id = user.beruf_id where user.username = {username};";
+            string query = $"SELECT user.user_id, user.username, user.first_name, user.last_name, class.class_id, class.bezeichnung as classname, class.stundenplan_id, beruf.beruf_id, beruf.bezeichnung as professionname FROM  user join class on class.class_id = user.class_id join beruf on beruf.beruf_id = user.beruf_id where user.username = \"{username}\"";
 
             return GetUser(query);
         }
@@ -101,14 +101,13 @@ namespace Server
                     string username = dataReader["username"].ToString();
                     string firstname = dataReader["first_name"].ToString();
                     string lastname = dataReader["last_name"].ToString();
-                    string password = dataReader["password"].ToString();
                     int profession_id = (int)dataReader["beruf_id"];
                     string profession_name = dataReader["professionname"].ToString();
                     int class_id = (int)dataReader["class_id"];
                     string class_name = dataReader["classname"].ToString();
                     int stundenplanId = (int)dataReader["stundenplan_id"];
 
-                    user = new User(uId, username, firstname, lastname, password, new Profession(profession_id, profession_name), new Classroom(class_id, class_name, stundenplanId));
+                    user = new User(uId, username, firstname, lastname, new Profession(profession_id, profession_name), new Classroom(class_id, class_name, stundenplanId));
                 }
             }
             catch (MySqlException e)
@@ -121,39 +120,74 @@ namespace Server
             return user;
         }
 
+        public bool CheckUserLogin(string username, string password)
+        {
+            bool isValid = false;
+            string query = $"Select user.username FROM user WHERE user.username = \"{username}\" AND user.password = \"{password}\"";
+
+            OpenConnection();
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string user = dataReader["username"].ToString();
+
+                    if(user == username)
+                    {
+                        isValid = true;
+                    }
+                }
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine($"Fehler beim Zugriff auf Datenbank: {e}");
+            }
+
+            CloseConnection();
+
+            return isValid;
+        }
+
         public List<User> GetAllUsers()
         {
-            string query = $"SELECT * FROM user";
+            string query = $"SELECT user.user_id, user.username, user.first_name, user.last_name, class.class_id, class.bezeichnung as classname, class.stundenplan_id, beruf.beruf_id, beruf.bezeichnung as professionname FROM  user join class on class.class_id = user.class_id join beruf on beruf.beruf_id = user.beruf_id;";
             List<User> users = new List<User>();
-            //List<Profession> professions = GetAllProfessions();
-            //List<Classroom> classes = GetAllClasses();
 
-            //OpenConnection();
+            OpenConnection();
 
-            //try
-            //{
-            //    MySqlCommand cmd = new MySqlCommand(query, connection);
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
 
-            //    MySqlDataReader dataReader = cmd.ExecuteReader();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
 
-            //    while (dataReader.Read())
-            //    {
-            //        int id = (int)dataReader["user_id"];
-            //        string firstname = dataReader["first_name"].ToString();
-            //        string lastname = dataReader["last_name"].ToString();
-            //        string password = dataReader["password"].ToString();
-            //        int profession_id = (int)dataReader["beruf_id"];
-            //        int class_id = (int)dataReader["class_id"];
+                while (dataReader.Read())
+                {
+                    int uId = (int)dataReader["user_id"];
+                    string username = dataReader["username"].ToString();
+                    string firstname = dataReader["first_name"].ToString();
+                    string lastname = dataReader["last_name"].ToString();
+                    int profession_id = (int)dataReader["beruf_id"];
+                    string profession_name = dataReader["professionname"].ToString();
+                    int class_id = (int)dataReader["class_id"];
+                    string class_name = dataReader["classname"].ToString();
+                    int stundenplanId = (int)dataReader["stundenplan_id"];
 
-            //        users.Add(new User(id, firstname, lastname, password, GetProfessionById(profession_id), GetClassById(class_id)));
-            //    }
-            //}
-            //catch (MySqlException e)
-            //{
-            //    Console.WriteLine($"Fehler beim Zugriff auf Datenbank: {e}");
-            //}
+                    User user = new User(uId, username, firstname, lastname, new Profession(profession_id, profession_name), new Classroom(class_id, class_name, stundenplanId));
+                    users.Add(user);
+                }
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine($"Fehler beim Zugriff auf Datenbank: {e}");
+            }
 
-            //CloseConnection();
+            CloseConnection();
 
             return users;
         }
@@ -162,7 +196,7 @@ namespace Server
 
         public bool InsertUser(string username, string firstname, string lastname, string password, int profession_id, int class_id)
         {
-            string query = $"INSERT INTO user (username, first_name,last_name,password, beruf_id, class_id) VALUES(\"{username}\",\"{firstname}\", \"{lastname}\",\"{password}\",\"{profession_id}\", \"{class_id}\"); ";
+            string query = $"INSERT INTO user (username,first_name,last_name,password, beruf_id, class_id) VALUES(\"{username}\",\"{firstname}\",\"{lastname}\",\"{password}\",\"{profession_id}\", \"{class_id}\"); ";
 
             return ExecuteQuery(query);
         }

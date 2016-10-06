@@ -145,15 +145,7 @@ namespace Server
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
 
-            User user = dbConnector.GetUserByName(name);
-            if (user.password == password)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return dbConnector.CheckUserLogin(name, password);
         }
 
         /// <summary>
