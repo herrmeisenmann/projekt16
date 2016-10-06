@@ -40,6 +40,9 @@ namespace Client.Server {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Client.Server.Profession professionField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string usernameField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -128,6 +131,19 @@ namespace Client.Server {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
+                    this.usernameField = value;
+                    this.RaisePropertyChanged("username");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -148,10 +164,13 @@ namespace Client.Server {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string descriptionField;
+        private int idField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int timetable_idField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -164,14 +183,14 @@ namespace Client.Server {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string description {
+        public int id {
             get {
-                return this.descriptionField;
+                return this.idField;
             }
             set {
-                if ((object.ReferenceEquals(this.descriptionField, value) != true)) {
-                    this.descriptionField = value;
-                    this.RaisePropertyChanged("description");
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
                 }
             }
         }
@@ -185,6 +204,19 @@ namespace Client.Server {
                 if ((object.ReferenceEquals(this.nameField, value) != true)) {
                     this.nameField = value;
                     this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int timetable_id {
+            get {
+                return this.timetable_idField;
+            }
+            set {
+                if ((this.timetable_idField.Equals(value) != true)) {
+                    this.timetable_idField = value;
+                    this.RaisePropertyChanged("timetable_id");
                 }
             }
         }
@@ -209,6 +241,9 @@ namespace Client.Server {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -218,6 +253,19 @@ namespace Client.Server {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
             }
         }
         
@@ -246,18 +294,33 @@ namespace Client.Server {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UserSchedule", Namespace="http://schemas.datacontract.org/2004/07/Server.Data")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Appointment", Namespace="http://schemas.datacontract.org/2004/07/Server.Data")]
     [System.SerializableAttribute()]
-    public partial class UserSchedule : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Appointment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string appointmentField;
+        private string commentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string descriptionField;
+        private System.DateTime dateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int gradeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string subjectField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int userIdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -270,27 +333,92 @@ namespace Client.Server {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string appointment {
+        public string comment {
             get {
-                return this.appointmentField;
+                return this.commentField;
             }
             set {
-                if ((object.ReferenceEquals(this.appointmentField, value) != true)) {
-                    this.appointmentField = value;
-                    this.RaisePropertyChanged("appointment");
+                if ((object.ReferenceEquals(this.commentField, value) != true)) {
+                    this.commentField = value;
+                    this.RaisePropertyChanged("comment");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string description {
+        public System.DateTime date {
             get {
-                return this.descriptionField;
+                return this.dateField;
             }
             set {
-                if ((object.ReferenceEquals(this.descriptionField, value) != true)) {
-                    this.descriptionField = value;
-                    this.RaisePropertyChanged("description");
+                if ((this.dateField.Equals(value) != true)) {
+                    this.dateField = value;
+                    this.RaisePropertyChanged("date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int grade {
+            get {
+                return this.gradeField;
+            }
+            set {
+                if ((this.gradeField.Equals(value) != true)) {
+                    this.gradeField = value;
+                    this.RaisePropertyChanged("grade");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string subject {
+            get {
+                return this.subjectField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.subjectField, value) != true)) {
+                    this.subjectField = value;
+                    this.RaisePropertyChanged("subject");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int userId {
+            get {
+                return this.userIdField;
+            }
+            set {
+                if ((this.userIdField.Equals(value) != true)) {
+                    this.userIdField = value;
+                    this.RaisePropertyChanged("userId");
                 }
             }
         }
@@ -315,11 +443,17 @@ namespace Client.Server {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetUserById", ReplyAction="http://tempuri.org/IService/GetUserByIdResponse")]
         System.Threading.Tasks.Task<Client.Server.User> GetUserByIdAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InsertUserIntoDb", ReplyAction="http://tempuri.org/IService/InsertUserIntoDbResponse")]
-        bool InsertUserIntoDb(Client.Server.User user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetUserByName", ReplyAction="http://tempuri.org/IService/GetUserByNameResponse")]
+        Client.Server.User GetUserByName(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetUserByName", ReplyAction="http://tempuri.org/IService/GetUserByNameResponse")]
+        System.Threading.Tasks.Task<Client.Server.User> GetUserByNameAsync(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InsertUserIntoDb", ReplyAction="http://tempuri.org/IService/InsertUserIntoDbResponse")]
-        System.Threading.Tasks.Task<bool> InsertUserIntoDbAsync(Client.Server.User user);
+        bool InsertUserIntoDb(string username, string firstname, string lastname, string password, int profession_id, int class_id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InsertUserIntoDb", ReplyAction="http://tempuri.org/IService/InsertUserIntoDbResponse")]
+        System.Threading.Tasks.Task<bool> InsertUserIntoDbAsync(string username, string firstname, string lastname, string password, int profession_id, int class_id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoginUser", ReplyAction="http://tempuri.org/IService/LoginUserResponse")]
         bool LoginUser(string name, string password);
@@ -327,23 +461,23 @@ namespace Client.Server {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/LoginUser", ReplyAction="http://tempuri.org/IService/LoginUserResponse")]
         System.Threading.Tasks.Task<bool> LoginUserAsync(string name, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetUserScheduleByUserId", ReplyAction="http://tempuri.org/IService/GetUserScheduleByUserIdResponse")]
-        Client.Server.UserSchedule GetUserScheduleByUserId(int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAppointmentsByUserId", ReplyAction="http://tempuri.org/IService/GetAppointmentsByUserIdResponse")]
+        System.Collections.Generic.List<Client.Server.Appointment> GetAppointmentsByUserId(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetUserScheduleByUserId", ReplyAction="http://tempuri.org/IService/GetUserScheduleByUserIdResponse")]
-        System.Threading.Tasks.Task<Client.Server.UserSchedule> GetUserScheduleByUserIdAsync(int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAppointmentsByUserId", ReplyAction="http://tempuri.org/IService/GetAppointmentsByUserIdResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Client.Server.Appointment>> GetAppointmentsByUserIdAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InsertNewUserAppointment", ReplyAction="http://tempuri.org/IService/InsertNewUserAppointmentResponse")]
-        bool InsertNewUserAppointment(int id, Client.Server.UserSchedule appointment);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InsertUserAppointment", ReplyAction="http://tempuri.org/IService/InsertUserAppointmentResponse")]
+        bool InsertUserAppointment(int userId, string name, string comment, System.DateTime date, string subject, int grade);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InsertNewUserAppointment", ReplyAction="http://tempuri.org/IService/InsertNewUserAppointmentResponse")]
-        System.Threading.Tasks.Task<bool> InsertNewUserAppointmentAsync(int id, Client.Server.UserSchedule appointment);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/InsertUserAppointment", ReplyAction="http://tempuri.org/IService/InsertUserAppointmentResponse")]
+        System.Threading.Tasks.Task<bool> InsertUserAppointmentAsync(int userId, string name, string comment, System.DateTime date, string subject, int grade);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClass", ReplyAction="http://tempuri.org/IService/GetClassResponse")]
-        Client.Server.Classroom GetClass(Client.Server.User user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClassByUserId", ReplyAction="http://tempuri.org/IService/GetClassByUserIdResponse")]
+        Client.Server.Classroom GetClassByUserId(int userId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClass", ReplyAction="http://tempuri.org/IService/GetClassResponse")]
-        System.Threading.Tasks.Task<Client.Server.Classroom> GetClassAsync(Client.Server.User user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClassByUserId", ReplyAction="http://tempuri.org/IService/GetClassByUserIdResponse")]
+        System.Threading.Tasks.Task<Client.Server.Classroom> GetClassByUserIdAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClassScheduleById", ReplyAction="http://tempuri.org/IService/GetClassScheduleByIdResponse")]
         System.IO.Stream GetClassScheduleById(int id);
@@ -356,6 +490,30 @@ namespace Client.Server {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllClasses", ReplyAction="http://tempuri.org/IService/GetAllClassesResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<Client.Server.Classroom>> GetAllClassesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllProfessions", ReplyAction="http://tempuri.org/IService/GetAllProfessionsResponse")]
+        System.Collections.Generic.List<Client.Server.Profession> GetAllProfessions();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllProfessions", ReplyAction="http://tempuri.org/IService/GetAllProfessionsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Client.Server.Profession>> GetAllProfessionsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllUsers", ReplyAction="http://tempuri.org/IService/GetAllUsersResponse")]
+        System.Collections.Generic.List<Client.Server.User> GetAllUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAllUsers", ReplyAction="http://tempuri.org/IService/GetAllUsersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Client.Server.User>> GetAllUsersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetChatMessages", ReplyAction="http://tempuri.org/IService/GetChatMessagesResponse")]
+        System.Collections.Generic.List<string> GetChatMessages(int amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetChatMessages", ReplyAction="http://tempuri.org/IService/GetChatMessagesResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<string>> GetChatMessagesAsync(int amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/WriteToChat", ReplyAction="http://tempuri.org/IService/WriteToChatResponse")]
+        void WriteToChat(string user, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/WriteToChat", ReplyAction="http://tempuri.org/IService/WriteToChatResponse")]
+        System.Threading.Tasks.Task WriteToChatAsync(string user, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -393,12 +551,20 @@ namespace Client.Server {
             return base.Channel.GetUserByIdAsync(id);
         }
         
-        public bool InsertUserIntoDb(Client.Server.User user) {
-            return base.Channel.InsertUserIntoDb(user);
+        public Client.Server.User GetUserByName(string name) {
+            return base.Channel.GetUserByName(name);
         }
         
-        public System.Threading.Tasks.Task<bool> InsertUserIntoDbAsync(Client.Server.User user) {
-            return base.Channel.InsertUserIntoDbAsync(user);
+        public System.Threading.Tasks.Task<Client.Server.User> GetUserByNameAsync(string name) {
+            return base.Channel.GetUserByNameAsync(name);
+        }
+        
+        public bool InsertUserIntoDb(string username, string firstname, string lastname, string password, int profession_id, int class_id) {
+            return base.Channel.InsertUserIntoDb(username, firstname, lastname, password, profession_id, class_id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> InsertUserIntoDbAsync(string username, string firstname, string lastname, string password, int profession_id, int class_id) {
+            return base.Channel.InsertUserIntoDbAsync(username, firstname, lastname, password, profession_id, class_id);
         }
         
         public bool LoginUser(string name, string password) {
@@ -409,28 +575,28 @@ namespace Client.Server {
             return base.Channel.LoginUserAsync(name, password);
         }
         
-        public Client.Server.UserSchedule GetUserScheduleByUserId(int id) {
-            return base.Channel.GetUserScheduleByUserId(id);
+        public System.Collections.Generic.List<Client.Server.Appointment> GetAppointmentsByUserId(int id) {
+            return base.Channel.GetAppointmentsByUserId(id);
         }
         
-        public System.Threading.Tasks.Task<Client.Server.UserSchedule> GetUserScheduleByUserIdAsync(int id) {
-            return base.Channel.GetUserScheduleByUserIdAsync(id);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Client.Server.Appointment>> GetAppointmentsByUserIdAsync(int id) {
+            return base.Channel.GetAppointmentsByUserIdAsync(id);
         }
         
-        public bool InsertNewUserAppointment(int id, Client.Server.UserSchedule appointment) {
-            return base.Channel.InsertNewUserAppointment(id, appointment);
+        public bool InsertUserAppointment(int userId, string name, string comment, System.DateTime date, string subject, int grade) {
+            return base.Channel.InsertUserAppointment(userId, name, comment, date, subject, grade);
         }
         
-        public System.Threading.Tasks.Task<bool> InsertNewUserAppointmentAsync(int id, Client.Server.UserSchedule appointment) {
-            return base.Channel.InsertNewUserAppointmentAsync(id, appointment);
+        public System.Threading.Tasks.Task<bool> InsertUserAppointmentAsync(int userId, string name, string comment, System.DateTime date, string subject, int grade) {
+            return base.Channel.InsertUserAppointmentAsync(userId, name, comment, date, subject, grade);
         }
         
-        public Client.Server.Classroom GetClass(Client.Server.User user) {
-            return base.Channel.GetClass(user);
+        public Client.Server.Classroom GetClassByUserId(int userId) {
+            return base.Channel.GetClassByUserId(userId);
         }
         
-        public System.Threading.Tasks.Task<Client.Server.Classroom> GetClassAsync(Client.Server.User user) {
-            return base.Channel.GetClassAsync(user);
+        public System.Threading.Tasks.Task<Client.Server.Classroom> GetClassByUserIdAsync(int userId) {
+            return base.Channel.GetClassByUserIdAsync(userId);
         }
         
         public System.IO.Stream GetClassScheduleById(int id) {
@@ -447,6 +613,38 @@ namespace Client.Server {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<Client.Server.Classroom>> GetAllClassesAsync() {
             return base.Channel.GetAllClassesAsync();
+        }
+        
+        public System.Collections.Generic.List<Client.Server.Profession> GetAllProfessions() {
+            return base.Channel.GetAllProfessions();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Client.Server.Profession>> GetAllProfessionsAsync() {
+            return base.Channel.GetAllProfessionsAsync();
+        }
+        
+        public System.Collections.Generic.List<Client.Server.User> GetAllUsers() {
+            return base.Channel.GetAllUsers();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Client.Server.User>> GetAllUsersAsync() {
+            return base.Channel.GetAllUsersAsync();
+        }
+        
+        public System.Collections.Generic.List<string> GetChatMessages(int amount) {
+            return base.Channel.GetChatMessages(amount);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<string>> GetChatMessagesAsync(int amount) {
+            return base.Channel.GetChatMessagesAsync(amount);
+        }
+        
+        public void WriteToChat(string user, string message) {
+            base.Channel.WriteToChat(user, message);
+        }
+        
+        public System.Threading.Tasks.Task WriteToChatAsync(string user, string message) {
+            return base.Channel.WriteToChatAsync(user, message);
         }
     }
 }

@@ -31,10 +31,10 @@ namespace Client.Views.ClientAccount
             List<Profession> list = server.GetAllProfessions();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-        public String saveUser(string firstname, string lastname, string password, int profession_id, int class_id)
+        public String saveUser(string username, string firstname, string lastname, string password, int profession_id, int class_id)
         {
             ServiceClient server = new ServiceClient();
-            bool save = server.InsertUser(firstname, lastname, password, profession_id, class_id);
+            bool save = server.InsertUserIntoDb(username, firstname, lastname, password, profession_id, class_id);
             if (save == true) {
                 return "User wurde gespeichert!";
             }

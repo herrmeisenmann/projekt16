@@ -1221,7 +1221,13 @@
     <Content Include="Service References\Server\Client.Server.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\Server\Client.Server.UserSchedule.datasource">
+    <None Include="Service References\Server\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\Server\Client.Server.Appointment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\Server\Client.Server.Profession.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\Server\configuration91.svcinfo" />

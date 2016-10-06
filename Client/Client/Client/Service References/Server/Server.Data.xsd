@@ -8,6 +8,7 @@
       <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="profession" nillable="true" type="tns:Profession" />
+      <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="User" nillable="true" type="tns:User" />
@@ -50,6 +51,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfClassroom" nillable="true" type="tns:ArrayOfClassroom" />
+  <xs:complexType name="ArrayOfProfession">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Profession" nillable="true" type="tns:Profession" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProfession" nillable="true" type="tns:ArrayOfProfession" />
   <xs:complexType name="ArrayOfUser">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />

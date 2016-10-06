@@ -1,6 +1,7 @@
 /**
  * Created by Nik on 27.09.2016.
  */
+var schedule_id = 0;
 function showWidget(component){
     //$("#"+component).removeAttr("display");
     var window = $("#"+component).data("kendoWindow");
@@ -10,22 +11,27 @@ function kendoWindows() {
     // initialize the widget
     $("#stundenplan").kendoWindow({
         title: "Stundenplan",
-        id: "test"
+        visible: false
     });
     $("#userinfo").kendoWindow({
-        title: "User Infos"
+        title: "User Infos",
+        visible: false
     });
     $("#termine").kendoWindow({
-        title: "Termine"
+        title: "Termine",
+        visible: false
     });
     $("#infoIHK").kendoWindow({
-        title: "Prüfungstermine und infos"
+        title: "Prüfungstermine und infos",
+        visible: false
     });
     $("#new").kendoWindow({
-        title: "Folgt..."
+        title: "Folgt...",
+        visible: false
     });
     $("#chat").kendoWindow({
-        title: "Klassenchat"
+        title: "Klassenchat",
+        visible: false
     });
     $("#menu").kendoMenu({
         animation: { open: { effects: "fadeIn" } }
@@ -73,57 +79,66 @@ function termineGrid() {
     var appointmentsDataSource = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "/Client/getAppointmentsByUserId=id=" + id,
+                url: "/Client/getAppointmentsByUserId?id=" + id,
                 dataType: "json"
             }
         }
     })
     $("#termineGrid").kendoGrid({
-        dataSource: appointmentsDataSource
+        dataSource: appointmentsDataSource,
+        columns: [
+            {
+                field: "name",
+                title: "Terminart"
+            },
+            {
+                field: "subject",
+                title: "Fach"
+            },
+            {
+                field: "date",
+                title: "Datum"
+            },
+            {
+                field: "comment",
+                title: "Kommentar"
+            },
+            {
+                field: "grade",
+                title: "Note"
+            },
+        ]
     });
 }
 function userInfo() {
         //Niklas
     var id = 8;
-    var class_id = 0;
-    var profession_id = 0;
         $.ajax({
             url: "/Client/getUserById?id=" + id,
             success: function (data) {
                 console.log(data);
-                $("#firstname").text(data.firstname)
-                $("#lastname").text(data.lastname)
-                class_id = data.class_id;
-                profession_id = data.profession_id;
+                $("#username").text(data.username);
+                $("#firstname").text(data.firstname);
+                $("#lastname").text(data.lastname);
+                $("#class").text(data.classroom.name);
+                $("#profession").text(data.profession.name);
+                schedule_id = data.classroom.timetable_id;
+                console.log("Timetable_id: " + data.classroom.timetable_id);
             }
         });
-        if (class_id > 0) {
-            $.ajax({
-                url: "/Client/getClassById?id=" + class_id,
-                success: function (data) {
-                    console.log(data);
-                    $("#class").text(data.name)
-                }
-            });
+}
+function getSchedule() {
+    console.log("Schedule_id: " + schedule_id);
+    $.ajax({
+        url: "/Client/getSchedule?id=" + 1,
+        success: function (data) {
+            $('#schedule').attr('src', data);
         }
-        else {
-            alert("Fehler in JavaScript:\n Klasse des Schülers konnte nicht geladen werden!\n class_id = " + class_id);
-        }
-        if (profession_id > 0) {
-            $.ajax({
-                url: "/Client/getProfessionById?id=" + profession_id,
-                success: function (data) {
-                    console.log(data);
-                    $("#profession").text(data.name)
-                }
-            });
-        }
-        else {
-            alert("Fehler in JavaScript:\n Beruf des Schülers konnte nicht geladen werden!\n profession_id = " + class_id);
-        }
+    });
 }
     function init() {
         userInfo();
+        getSchedule();
         termineGrid();
         kendoWindows();
 }
