@@ -6,10 +6,11 @@
     <ul id="menu">
         <li onclick="showWidget('stundenplan')">Stundenplan</li>
         <li onclick="showWidget('userinfo')">Steckbrief</li>
-        <li onclick="showWidget('infoIHK')">Prüfunginfos</li>
-        <li onclick="showWidget('new')">Folgt..</li>
+        @*<li onclick="showWidget('infoIHK')">Prüfunginfos</li>*@
+        @*<li onclick="showWidget('new')">Folgt..</li>*@
         <li onclick="showWidget('termine')">Terminliste</li>
-        <li onclick="showWidget('chat')">Chat</li>
+        <li onclick="getChat()">Chat</li>
+        <li onclick="logout()" style="float:right">Ausloggen</li>
     </ul>
     <div id="stundenplan"><img href="#" alt="Kein Bild gefunden!" /></div>
 
@@ -37,7 +38,7 @@
         <div id="newAppointmentWindow"></div>
         <div id="termineGrid"></div>
     </div>
-    <div id="chat">Hier kommt der Chat rein...</div>
+    <div id="chat"></div>
 </div>
 @section scripts
 {

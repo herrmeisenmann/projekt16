@@ -44,5 +44,18 @@ namespace Client.Views.ClientAccount
             }
             
         }
+        public String checkLogin(string username, string password)
+        {
+            ServiceClient server = new ServiceClient();
+            bool check = server.LoginUser(username, password);
+            if (check == true)
+            {
+                return "Login war erfolgreich!";
+            }
+            else
+            {
+                return "Ooops!\nDa ist was schiefgelaufen\nUsername oder Password sind falsch!";
+            }
+        }
     }
 }

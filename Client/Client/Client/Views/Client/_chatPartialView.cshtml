@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+    Layout = "";
+}
+
+<h2>Chat</h2>
+<div id="chatContent">
+    @*<div id="menu">
+        <p class="welcome">Welcome, <b></b></p>
+        <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+        <div style="clear:both"></div>
+    </div>*@
+
+    <pre id="chatbox"></pre>
+
+        <label for="chat_username">Username: </label>
+        <input class="k-textbox" id="chat_username" diabled/><br />
+        <label for="chat_username">Message: </label>
+        <input class="k-textbox" id="chat_massage" size="63" />
+        <br />
+        <button class="k-button" type="submit" id="submitChat" onclick="writeChat()">Senden</button>
+</div>
+<script>
+    $("#chat_username").val(localStorage['user_name']);
+</script>

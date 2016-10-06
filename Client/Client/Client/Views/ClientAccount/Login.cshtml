@@ -5,15 +5,9 @@
 
 <h2>Login</h2>
 <div class="form-group">
-    <lable class="col-md-2 control-label" for="login_firstname">Vorname: </lable>
+    <lable class="col-md-2 control-label" for="login_username">Username: </lable>
     <div class="col-md-10">
-        <input class="k-textbox" id="login_firstname" />
-    </div>
-</div>
-<div class="form-group">
-    <lable class="col-md-2 control-label" for="login_lastname">Nachname: </lable>
-    <div class="col-md-10">
-        <input class="k-textbox" id="login_lastname" />
+        <input class="k-textbox" id="login_username" />
     </div>
 </div>
 <div class="form-group">
@@ -24,9 +18,10 @@
 </div><br />
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
-        <input type="submit" id="login_submit" class="btn btn-default" value="Einloggen" />
+        <input type="submit" id="login_submit" class="btn btn-default" value="Einloggen" onclick="checkLogin()"/>
     </div>
 </div>
+Noch kein Account? <a href="~/ClientAccount/Register">Hier</a> Registrieren
 
 @section scripts
 {

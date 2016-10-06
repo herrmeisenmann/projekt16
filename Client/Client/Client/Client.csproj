@@ -1984,6 +1984,7 @@
     </None>
     <Content Include="Views\ClientAccount\Login.cshtml" />
     <Content Include="Views\Client\_newAppointmentPartialView.cshtml" />
+    <Content Include="Views\Client\_chatPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,6 +2,7 @@
 var professionDataSource = null;
 var drp_berufDropDown = null;
 var drp_klassenDropDown = null;
+var user_name = localStorage['user_name'];
 
 function kendoElements() {
     classesDataSource = new kendo.data.DataSource({
@@ -52,6 +53,22 @@ function saveUser() {
         }
     });
     
+}
+function checkLogin() {
+    var usernameVal = $("#login_username").val();
+    var passwordVal = $("#login_password").val();
+    var dataString = 'username=' + usernameVal + '&password=' + passwordVal;
+    console.log("loginUser: " + dataString)
+    $.ajax({
+        type: 'POST',
+        data: dataString,
+        url: '/ClientAccount/checkLogin',
+        success: function (data) {
+            alert(data);
+            localStorage['user_name'] = $("#login_username").val();
+            console.log(localStorage['user_name']);
+        }
+    });
 }
 function init() {
     kendoElements();

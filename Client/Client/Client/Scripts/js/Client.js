@@ -3,6 +3,7 @@
  */
 var schedule_id = 0;
 var user_id = 0;
+
 var appointmentsDataSource = null;
 var newAppointmentWindow;
 function showWidget(component){
@@ -15,110 +16,78 @@ function kendoWindows() {
     $("#stundenplan").kendoWindow({
         title: "Stundenplan",
         visible: false
-    });
+    }).data("kendoWindow").center();
     $("#userinfo").kendoWindow({
         title: "User Infos",
         visible: false
-    });
+    }).data("kendoWindow").center();
     $("#termine").kendoWindow({
         title: "Termine",
         visible: false
-    });
+    }).data("kendoWindow").center();
     $("#infoIHK").kendoWindow({
         title: "Prüfungstermine und infos",
         visible: false
-    });
+    }).data("kendoWindow").center();
     $("#new").kendoWindow({
         title: "Folgt...",
         visible: false
-    });
-    $("#chat").kendoWindow({
-        title: "Klassenchat",
-        visible: false
-    });
+    }).data("kendoWindow").center();
+
     $("#menu").kendoMenu({
         animation: { open: { effects: "fadeIn" } }
     });
 
-    //Anordnen der Widgets
-    $("#stundenplan").closest(".k-window").css({
-        top: "20%",
-        left: "20%"
-    });
-    $("#userinfo").closest(".k-window").css({
-        top: "20%",
-        left: "40%"
-    });
-
-    $("#new").closest(".k-window").css({
-        top: "20%",
-        left: "60%"
-    });
-    $("#infoIHK").closest(".k-window").css({
-        top: "20%",
-        left: "70%"
-    });
-    $("#termine").closest(".k-window").css({
-        top: "40%",
-        left: "20%",
-        width: "60%"
-    });
-    $("#chat").closest(".k-window").css({
-        top: "70%",
-        left: "20%",
-        width: "60%"
-    });
 }
 function termineGrid() {
     //Niklas
-    var id = 8;
-    //var dataSource = new kendo.data.DataSource({
-    //    data: [{ productName: "Tea", category: "Beverages" },
-    //        { productName: "Coffee", category: "Beverages" },
-    //        { productName: "Ham", category: "Food" },
-    //        { productName: "Bread", category: "Food" }
-    //    ]
-    //});
     appointmentsDataSource = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "/Client/getAppointmentsByUserId?id=" + id,
+                url: "/Client/getAppointmentsByUserId?id=" + user_id,
                 dataType: "json"
             }
         }
-    })
-    $("#termineGrid").kendoGrid({
-        dataSource: appointmentsDataSource,
-        columns: [
-            {
-                field: "name",
-                title: "Terminart"
-            },
-            {
-                field: "subject",
-                title: "Fach"
-            },
-            {
-                field: "date",
-                title: "Datum",
-                template: '#= kendo.toString(kendo.parseDate(date, "dd.MM.yyyy" ), "dd.MM.yyyy" )#'
-            },
-            {
-                field: "comment",
-                title: "Kommentar"
-            },
-            {
-                field: "grade",
-                title: "Note"
-            },
-        ]
     });
+    console.log(appointmentsDataSource.data.length);
+        $("#termineGrid").kendoGrid({
+            dataSource: appointmentsDataSource,
+            columns: [
+                {
+                    field: "name",
+                    title: "Terminart",
+                    width: "40px"
+                },
+                {
+                    field: "subject",
+                    title: "Fach",
+                    width: "40px"
+                },
+                {
+                    field: "date",
+                    title: "Datum",
+                    template: '#= kendo.toString(kendo.parseDate(date, "dd.MM.yyyy" ), "dd.MM.yyyy" )#',
+                    width: "40px"
+                },
+                {
+                    field: "comment",
+                    title: "Kommentar",
+                    width: "40px"
+                },
+                {
+                    field: "grade",
+                    title: "Note",
+                    width: "40px"
+                },
+            ]
+        });
 }
 function userInfo() {
         //Niklas
-    var id = 8;
+    //localStorage['user_name'] = Lokal gespeicherte username nach dem login
+    if (localStorage['user_name'] != "") {
         $.ajax({
-            url: "/Client/getUserById?id=" + id,
+            url: "/Client/getUserByName?username=" + localStorage['user_name'],
             success: function (data) {
                 console.log(data);
                 $("#username").text(data.username);
@@ -132,6 +101,11 @@ function userInfo() {
             },
             async: false //setzen, sonst können keine Variablen gesetzt werden
         });
+    }
+    else {
+        alert("User mit username: " + localStorage['user_name'] + " nicht gefunden!\nLog dich bitte vorher ein");
+        window.location.href = "/ClientAccount/Login";
+    }
 }
 function getSchedule() {
     console.log("Schedule_id: " + schedule_id);
@@ -142,11 +116,46 @@ function getSchedule() {
         }
     });
 }
+function loadChatMessages() {
+    $.ajax({
+        url: "/Client/getChat",
+        success: function (data) {
+            //Macht breaks im Json
+            results = JSON.stringify(data, null, "\n");
+            $("#chatbox").append(results);
+        }
+    });
+}
+function getChat() {
+    loadChatMessages();
+    $("#chat").kendoWindow({
+        title: "Chat",
+        content: {
+            url: "/Client/_chatPartialView"
+        }
+    }).data("kendoWindow").center().open();
+    chatWindow = $("#chat").data("kendoWindow");
+}
+
+function writeChat() {
+    var usernameVal = $("#chat_username").val();
+    var messageVal = $("#chat_massage").val();
+    var dataString = 'user=' + usernameVal + '&message=' + messageVal;
+    $.ajax({
+        type: 'POST',
+        data: dataString,
+        url: '/Client/writeChat',
+        success: function (data) {
+            alert("Nachricht erfolgreich übermittelt");
+            loadChatMessages();
+        }
+    });
+}
 function newAppointment() {
     $("#newAppointmentWindow").kendoWindow({
-        title: "Stundenplan",
+        title: "Neuer Termin",
         content: {
-            url: "Client/_newAppointmentPartialView"
+            url: "/Client/_newAppointmentPartialView"
         }
     });
     newAppointmentWindow = $("#newAppointmentWindow").data("kendoWindow");
@@ -175,12 +184,15 @@ function saveAppointment() {
     });
 
 }
+function logout() {
+    localStorage['user_name'] = "";
+    window.location.href = "/ClientAccount/Login";
+}
 function init() {
-        
-        userInfo();
-        //getSchedule();
-        termineGrid();
-        kendoWindows();
+    userInfo();
+    //getSchedule();
+    termineGrid();
+    kendoWindows();
 }
 $(document).ready(function () {
     init();
