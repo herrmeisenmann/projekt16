@@ -84,6 +84,10 @@ function termineGrid() {
             }
         }
     })
+    $("#newAppointment").kendoWindow({
+        title: "Neuer Termin",
+        visible: false
+    });
     $("#termineGrid").kendoGrid({
         dataSource: appointmentsDataSource,
         columns: [
