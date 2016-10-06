@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Server.Data
 {
+    /// <summary>
+    /// Klasse zur Darstellung eines Berufs
+    /// </summary>
     [DataContract]
     public class Profession
     {

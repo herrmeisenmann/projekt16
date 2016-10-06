@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Server.Data
 {
+    /// <summary>
+    /// Klasse zur Darstellung der Userinfos
+    /// </summary>
     [DataContract]
     public class User
     {

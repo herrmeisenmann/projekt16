@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace Server
 {
+    /// <summary>
+    /// Connector-Klasse für die Anbindung an die Datenbank
+    /// </summary>
     class DbConnector
     {
         private MySqlConnection connection;
@@ -14,24 +17,32 @@ namespace Server
         private string user;
         private string password;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public DbConnector()
         {
             Initialize();
         }
+
+        /// <summary>
+        /// Initialisiert den Connector
+        /// </summary>
         private void Initialize()
         {
             server = "localhost";
             database = "sit_project";
             user = "root";
             password = "root";
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "user=" + user + ";" + "PASSWORD=" + password + ";";
+            string connectionString = $"SERVER={server};DATABASE={database};USER={user};PASSWORD={password};";
 
             connection = new MySqlConnection(connectionString);
         }
 
-        //open connection to database
+        /// <summary>
+        /// Öffne Verbindung zur Datenbank
+        /// </summary>
+        /// <returns>Erfolg: true/false</returns>
         public bool OpenConnection()
         {
             try
@@ -55,7 +66,10 @@ namespace Server
             }
         }
 
-        //Close connection
+        /// <summary>
+        /// Schließe Verbindung zu Datenbank
+        /// </summary>
+        /// <returns>Erfolg: true/false</returns>
         public bool CloseConnection()
         {
             try
@@ -69,6 +83,12 @@ namespace Server
                 return false;
             }
         }
+
+        /// <summary>
+        /// Erzeugt eine Datenbankquery mithilfe der übergebenen User-ID
+        /// </summary>
+        /// <param name="id">ID des gewollten Users</param>
+        /// <returns>User-Objekt</returns>
         public User GetUserById(int id)
         {
             string query = $"SELECT user.user_id, user.username, user.first_name, user.last_name, class.class_id, class.bezeichnung as classname, class.stundenplan_id, beruf.beruf_id, beruf.bezeichnung as professionname FROM  user join class on class.class_id = user.class_id join beruf on beruf.beruf_id = user.beruf_id where user.user_id = {id};";
@@ -76,6 +96,11 @@ namespace Server
             return GetUser(query);
         }
 
+        /// <summary>
+        /// Erzeugt eine Datenbankquery mithilfe der übergebenen User-ID
+        /// </summary>
+        /// <param name="username">Username des Users</param>
+        /// <returns>User-Objekt des Users</returns>
         public User GetUserByName(string username)
         {
             string query = $"SELECT user.user_id, user.username, user.first_name, user.last_name, class.class_id, class.bezeichnung as classname, class.stundenplan_id, beruf.beruf_id, beruf.bezeichnung as professionname FROM  user join class on class.class_id = user.class_id join beruf on beruf.beruf_id = user.beruf_id where user.username = \"{username}\"";
@@ -83,6 +108,11 @@ namespace Server
             return GetUser(query);
         }
 
+        /// <summary>
+        /// Erstellt ein User-Objekt mit Daten aus der Datenbank anhand der übergebenen Query
+        /// </summary>
+        /// <param name="query">User-Query</param>
+        /// <returns>User Objekt</returns>
         private User GetUser(string query)
         {
             User user = null;
@@ -120,6 +150,12 @@ namespace Server
             return user;
         }
 
+        /// <summary>
+        /// Überprüft, ob die übergebene Username+Passwort Kombination gültig ist
+        /// </summary>
+        /// <param name="username">Benutzername</param>
+        /// <param name="password">Passwort</param>
+        /// <returns>true bei validem Username+PW</returns>
         public bool CheckUserLogin(string username, string password)
         {
             bool isValid = false;
@@ -153,6 +189,10 @@ namespace Server
             return isValid;
         }
 
+        /// <summary>
+        /// Erstellt eine Liste aller User und deren Info aus der Datenbank
+        /// </summary>
+        /// <returns>Liste von User-Objekten</returns>
         public List<User> GetAllUsers()
         {
             string query = $"SELECT user.user_id, user.username, user.first_name, user.last_name, class.class_id, class.bezeichnung as classname, class.stundenplan_id, beruf.beruf_id, beruf.bezeichnung as professionname FROM  user join class on class.class_id = user.class_id join beruf on beruf.beruf_id = user.beruf_id;";
@@ -193,7 +233,16 @@ namespace Server
         }
 
 
-
+        /// <summary>
+        /// Fügt einen neuen User in die Datenbank ein
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="firstname"></param>
+        /// <param name="lastname"></param>
+        /// <param name="password"></param>
+        /// <param name="profession_id"></param>
+        /// <param name="class_id"></param>
+        /// <returns>Erfolg: true/false</returns>
         public bool InsertUser(string username, string firstname, string lastname, string password, int profession_id, int class_id)
         {
             string query = $"INSERT INTO user (username,first_name,last_name,password, beruf_id, class_id) VALUES(\"{username}\",\"{firstname}\",\"{lastname}\",\"{password}\",\"{profession_id}\", \"{class_id}\"); ";
@@ -201,6 +250,11 @@ namespace Server
             return ExecuteQuery(query);
         }
 
+        /// <summary>
+        /// Ermittle eine Klasse(Schulklasse) anhand seiner ID und gib diese wieder
+        /// </summary>
+        /// <param name="id">classroom_Id</param>
+        /// <returns>Classroom-Objekt</returns>
         public Classroom GetClassById(int id)
         {
             string query = $"SELECT * FROM class WHERE class_id={id}";
@@ -233,6 +287,10 @@ namespace Server
             return classroom;
         }
 
+        /// <summary>
+        /// Gibt alle in der Datenbank vorhandenen (Schul-)Klassen als Liste wieder
+        /// </summary>
+        /// <returns>Liste aller Klassen</returns>
         public List<Classroom> GetAllClasses()
         {
             List<Classroom> classes = new List<Classroom>();
@@ -265,7 +323,12 @@ namespace Server
             CloseConnection();
             return classes;
         }
-
+    
+        /// <summary>
+        /// Ermittelt ein Beruf aus der Datenbank anhand seiner Id
+        /// </summary>
+        /// <param name="id">Berufs-Id</param>
+        /// <returns>Berufs-Objekt</returns>
         public Profession GetProfessionById(int id)
         {
             string query = $"SELECT * FROM beruf WHERE beruf_id={id}";
@@ -296,6 +359,11 @@ namespace Server
 
             return profession;
         }
+
+        /// <summary>
+        /// Gibt alle Berufe aus der Datenbank als Liste wieder
+        /// </summary>
+        /// <returns>Liste aller Berufe</returns>
         public List<Profession> GetAllProfessions()
         {
             List<Profession> professions = new List<Profession>();
@@ -329,6 +397,11 @@ namespace Server
             return professions;
         }
         
+        /// <summary>
+        /// Gibt alle Termine eines Users anhand der User-Id wieder
+        /// </summary>
+        /// <param name="id">User ID</param>
+        /// <returns>Liste aller Termine</returns>
         public List<Appointment> GetAppointmentsByUserId(int id)
         {
             List<Appointment> appointments = new List<Appointment>();
@@ -368,6 +441,16 @@ namespace Server
             return appointments;
         }
 
+        /// <summary>
+        /// Fügt einen neuen Termin in die Datenbank hinzu
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="name"></param>
+        /// <param name="comment"></param>
+        /// <param name="date"></param>
+        /// <param name="subject"></param>
+        /// <param name="grade"></param>
+        /// <returns>Erfolg: true/false</returns>
         public bool InsertUserAppointment(int userId, string name, string comment, DateTime date, string subject, int grade)
         {
             string MySQLFormatDate = date.ToString("yyyy-MM-dd HH:mm:ss");
@@ -376,6 +459,11 @@ namespace Server
             return ExecuteQuery(query);
         }
 
+        /// <summary>
+        /// Führt eine Query aus
+        /// </summary>
+        /// <param name="query">Query string</param>
+        /// <returns>Erfolg: true/false</returns>
         private bool ExecuteQuery(string query)
         {
             bool success = true;

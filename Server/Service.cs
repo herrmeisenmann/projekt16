@@ -23,6 +23,7 @@ namespace Server
         public List<Classroom> GetAllClasses()
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
             return dbConnector.GetAllClasses();
         }
 
@@ -33,6 +34,7 @@ namespace Server
         public List<User> GetAllUsers()
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
             return dbConnector.GetAllUsers();
         }
 
@@ -44,9 +46,8 @@ namespace Server
         public Classroom GetClassByUserId(int userId)
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
-            Classroom classroom = dbConnector.GetUserById(userId).classroom;
-
-            return classroom;
+            
+            return dbConnector.GetUserById(userId).classroom;
         }
 
         /// <summary>
@@ -57,15 +58,17 @@ namespace Server
         public Stream GetClassScheduleById(int id)
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
-            string filepath = $"C:\\projects\\projekt16\\Server\\stundenplan\\{id}.png";
-            if(File.Exists(filepath))
+
+            string filepath = $"C:\\projects\\projekt16\\Server\\stundenplan\\";
+
+            //Wenn Datei vorhanden gebe diese wieder, ansonsten gebe "error.png" zurück
+            if(File.Exists(filepath + $"{id}.png"))
             {
-                return new FileStream(filepath, FileMode.Open, FileAccess.Read);
+                return new FileStream(filepath + $"{id}.png", FileMode.Open, FileAccess.Read);
             }
             else
             {
-                filepath = $"C:\\projects\\projekt16\\Server\\stundenplan\\error.png";
-                return new FileStream(filepath, FileMode.Open, FileAccess.Read);
+                return new FileStream(filepath + "error.png", FileMode.Open, FileAccess.Read);
             }
         }
 
@@ -77,17 +80,30 @@ namespace Server
         public User GetUserById(int id)
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
             return dbConnector.GetUserById(id);
         }
 
+        /// <summary>
+        /// Ermittle User-Objekt anhand eines Usernamens
+        /// </summary>
+        /// <param name="name">Username</param>
+        /// <returns>User-Objekt passend zum Usernamen</returns>
         public User GetUserByName(string name)
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
             return dbConnector.GetUserByName(name);
         }
 
+        /// <summary>
+        /// Gibt alle Berufe wieder
+        /// </summary>
+        /// <returns>Liste aller Berufe</returns>
         public List<Profession> GetAllProfessions()
         {
+            Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
             return dbConnector.GetAllProfessions();
         }
 
@@ -99,8 +115,8 @@ namespace Server
         public List<Appointment> GetAppointmentsByUserId(int id)
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
-            List<Appointment> appointments = dbConnector.GetAppointmentsByUserId(id);
-            return appointments;
+            
+            return dbConnector.GetAppointmentsByUserId(id);
         }
 
         /// <summary>
@@ -116,6 +132,7 @@ namespace Server
         public bool InsertUserAppointment(int userId, string name, string comment, DateTime date, string subject, int grade)
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
             return dbConnector.InsertUserAppointment(userId, name, comment, date, subject, grade);
         }
 
@@ -132,6 +149,7 @@ namespace Server
         public bool InsertUserIntoDb(string username, string firstname, string lastname, string password, int profession_id, int class_id)
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
             return dbConnector.InsertUser(username, firstname, lastname, password, profession_id, class_id);
         }
 
@@ -155,7 +173,10 @@ namespace Server
         /// <returns>Liste der Chatnachrichten</returns>
         public List<String> GetChatMessages(int amount)
         {
+            Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
             List<String> chat = chatHandler.GetChat();
+
             if (amount <= 0)
             {
                 return chat;
@@ -173,9 +194,11 @@ namespace Server
         /// Schreibe eine Nachricht als User in den Chat
         /// </summary>
         /// <param name="user">User</param>
-        /// <param name="message">Nachrricht</param>
+        /// <param name="message">Nachricht</param>
         public void WriteToChat(string user, string message)
         {
+            Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
             chatHandler.AddMessage(user, message);
         }
     }

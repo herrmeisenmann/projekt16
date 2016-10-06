@@ -10,6 +10,10 @@ using System.IO;
 
 namespace Server
 {
+    /// <summary>
+    /// Interface für den WCF-Service
+    /// Alle hier aufgeführten Methoden stehen dem Konsumenten(Client) zur verfügung
+    /// </summary>
     [ServiceContract]
     interface IService
     {

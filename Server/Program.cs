@@ -11,16 +11,17 @@ namespace Server
     {
         static void Main(string[] args)
         {
+            // Starte WCF-Web-Service
             using (ServiceHost host = new ServiceHost(typeof(Service)))
             {
                 host.Open();
 
-                Console.WriteLine("Service up and running at:");
+                Console.WriteLine("Service Läuft auf:");
                 foreach (var ea in host.Description.Endpoints)
                 {
                     Console.WriteLine(ea.Address);
                 }
-
+                
                 Console.ReadLine();
                 host.Close();
             }

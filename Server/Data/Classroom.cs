@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Server.Data
 {
+    /// <summary>
+    /// Klasse zur Darstellung einer (Schul-)Klasse
+    /// </summary>
     [DataContract]
     public class Classroom
     {
