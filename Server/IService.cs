@@ -21,7 +21,7 @@ namespace Server
 
 
         [OperationContract]
-        bool InsertUserIntoDb(string firstname, string lastname, string password, int profession_id, int class_id);
+        bool InsertUserIntoDb(string username, string firstname, string lastname, string password, int profession_id, int class_id);
 
         [OperationContract]
         bool LoginUser(string name, string password);
@@ -30,7 +30,7 @@ namespace Server
         List<Appointment> GetAppointmentsByUserId(int id);
 
         [OperationContract]
-        bool InsertNewUserAppointment(int userId, string name, string comment, DateTime date, string subject, int grade);
+        bool InsertUserAppointment(int userId, string name, string comment, DateTime date, string subject, int grade);
 
         [OperationContract]
         Classroom GetClassByUserId(int userId);
@@ -40,6 +40,9 @@ namespace Server
 
         [OperationContract]
         List<Classroom> GetAllClasses();
+
+        [OperationContract]
+        List<Profession> GetAllProfessions();
 
         [OperationContract]
         List<User> GetAllUsers();

@@ -86,6 +86,11 @@ namespace Server
             return dbConnector.GetUserByName(name);
         }
 
+        public List<Profession> GetAllProfessions()
+        {
+            return dbConnector.GetAllProfessions();
+        }
+
         /// <summary>
         /// Gibt eine Liste von allen Terminen des Users wieder
         /// </summary>
@@ -108,7 +113,7 @@ namespace Server
         /// <param name="subject"></param>
         /// <param name="grade"></param>
         /// <returns></returns>
-        public bool InsertNewUserAppointment(int userId, string name, string comment, DateTime date, string subject, int grade)
+        public bool InsertUserAppointment(int userId, string name, string comment, DateTime date, string subject, int grade)
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
             return dbConnector.InsertUserAppointment(userId, name, comment, date, subject, grade);
@@ -124,10 +129,10 @@ namespace Server
         /// <param name="profession_id">Berufsbezeich. ID</param>
         /// <param name="class_id">Klassen ID</param>
         /// <returns>Erfolg true/false</returns>
-        public bool InsertUserIntoDb(string firstname, string lastname, string password, int profession_id, int class_id)
+        public bool InsertUserIntoDb(string username, string firstname, string lastname, string password, int profession_id, int class_id)
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
-            return dbConnector.InsertUser(firstname, lastname, password, profession_id, class_id);
+            return dbConnector.InsertUser(username, firstname, lastname, password, profession_id, class_id);
         }
 
         /// <summary>
@@ -159,15 +164,17 @@ namespace Server
         public List<String> GetChatMessages(int amount)
         {
             List<String> chat = chatHandler.GetChat();
-            if(amount <= 0)
+            if (amount <= 0)
             {
                 return chat;
             }
+            else
+            {
+                //Wenn amount >0 gebe nur die aktuellsten >amount< Nachrichten wieder
+                chat = new List<String>(chat.Skip(Math.Max(0, chat.Count() - amount)).Take(amount));
 
-            //Wenn amount >0 gebe nur die aktuellsten >amount< Nachrichten wieder
-            chat = new List<String>(chat.Skip(Math.Max(0, chat.Count() - amount)).Take(amount));
-
-            return chat;
+                return chat;
+            }
         }
 
         /// <summary>

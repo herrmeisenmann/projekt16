@@ -13,6 +13,8 @@ namespace Server.Data
         [DataMember]
         public int id;
         [DataMember]
+        public string username;
+        [DataMember]
         public string firstname;
         [DataMember]
         public string lastname;
@@ -24,25 +26,15 @@ namespace Server.Data
         public Classroom classroom;
 
         
-        public User(int id, string firstname, string lastname, string password, Profession profession, Classroom classroom)
+        public User(int id, string username, string firstname, string lastname, string password, Profession profession, Classroom classroom)
         {
             this.id = id;
+            this.username = username;
             this.firstname = firstname;
             this.lastname = lastname;
             this.password = password;
             this.profession = profession;
             this.classroom = classroom;
         }
-
-        public User(int id, string firstname, string lastname, string password)
-        {
-            this.id = id;
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.password = password;
-            this.profession = new Profession(1, "NA");
-            this.classroom = new Classroom(1, "NA", 1);
-        }
-
     }
 }
