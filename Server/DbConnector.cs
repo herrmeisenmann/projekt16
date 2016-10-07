@@ -487,6 +487,12 @@ namespace Server
             return success;
         }
 
+        /// <summary>
+        /// Schreibt eine Chatnachricht auf die Datenbank
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public bool CreateChatMessage(string username, string message)
         {
             DateTime date = DateTime.Now;
@@ -496,6 +502,10 @@ namespace Server
             return ExecuteQuery(query);
         }
 
+        /// <summary>
+        /// Holt den Chatverlauf aus der Datenbank
+        /// </summary>
+        /// <returns>Aufbereiteter Chateintrag als Liste von Strings</returns>
         public List<String> GetChat()
         {
             List<String> chat = new List<string>();
@@ -527,6 +537,40 @@ namespace Server
             CloseConnection();
 
             return chat;
+        }
+
+        /// <summary>
+        /// Ermittelt den Notendurchschnitt eines Users mit userId
+        /// </summary>
+        /// <param name="userId">Id de Users</param>
+        /// <returns>Notendurchschnitt</returns>
+        public double GetAverageGradeByUserId(int userId)
+        {
+            double avg = 0;
+
+            string query = $"SELECT ROUND(AVG(note),2) AS average FROM termine WHERE termine.user_id={userId};";
+
+            OpenConnection();
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    Double.TryParse(dataReader["average"].ToString(), out avg);
+                }
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine($"Fehler beim Lesen von Datenbank: ${e}");
+            }
+
+            CloseConnection();
+
+            return avg;
         }
     }
 }

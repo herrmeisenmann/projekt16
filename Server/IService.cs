@@ -56,5 +56,8 @@ namespace Server
 
         [OperationContract]
         void WriteToChat(string user, string message);
+
+        [OperationContract]
+        double GetAverageGradeByUserId(int userId);
     }
 }

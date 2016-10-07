@@ -200,5 +200,17 @@ namespace Server
 
             dbConnector.CreateChatMessage(user, message);
         }
+
+        /// <summary>
+        /// Ermittelt den Notendurchschnitt des Users aus der Datenbank
+        /// </summary>
+        /// <param name="userId">UserId</param>
+        /// <returns>Notendurchschnitt</returns>
+        public double GetAverageGradeByUserId(int userId)
+        {
+            Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
+
+            return dbConnector.GetAverageGradeByUserId(userId);
+        }
     }
 }
