@@ -12,7 +12,9 @@
         <li onclick="getChat()">Chat</li>
         <li onclick="logout()" style="float:right">Ausloggen</li>
     </ul>
-    <div id="stundenplan"><img href="#" alt="Kein Bild gefunden!" /></div>
+    <div id="stundenplan">
+        <div id="schedule"></div>
+    </div>
 
     <div id="userinfo">
         <label for="username">Username: </label>
@@ -37,6 +39,10 @@
         <button class="k-button" id="newAppointmentButton" onclick="newAppointment()">Neuer Termin</button>
         <div id="newAppointmentWindow"></div>
         <div id="termineGrid"></div>
+        <div style="float: right">
+            <label for="average">Notendurchschnitt: </label>
+            <input class="k-textbot" id="average" disabled />
+        </div>
     </div>
     <div id="chat"></div>
 </div>

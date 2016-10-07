@@ -81,6 +81,14 @@ function termineGrid() {
                 },
             ]
         });
+        $.ajax({
+            url: "/Client/getGradAvg?id=" + user_id,
+            success: function (data) {
+                console.log(data);
+                $("#average").val(data);
+            },
+            async: false //setzen, sonst können keine Variablen gesetzt werden
+        });
 }
 function userInfo() {
         //Niklas
@@ -112,7 +120,8 @@ function getSchedule() {
     $.ajax({
         url: "/Client/getSchedule?id=" + schedule_id,
         success: function (data) {
-            $('#schedule').attr('src', data);
+            //$('#schedule').attr('src', data);
+            $('#schedule').html('<img src="data:image/png;base64,'+data+'" />');
         }
     });
 }
@@ -122,7 +131,7 @@ function loadChatMessages() {
         success: function (data) {
             //Macht breaks im Json
             results = JSON.stringify(data, null, "\n");
-            $("#chatbox").append(results);
+            $("#chatbox").text(results);
         }
     });
 }
@@ -138,9 +147,10 @@ function getChat() {
 }
 
 function writeChat() {
+//localStorage['user_name']
     var usernameVal = $("#chat_username").val();
     var messageVal = $("#chat_massage").val();
-    var dataString = 'user=' + usernameVal + '&message=' + messageVal;
+    var dataString = 'username=' + usernameVal + '&message=' + messageVal;
     $.ajax({
         type: 'POST',
         data: dataString,
@@ -190,7 +200,7 @@ function logout() {
 }
 function init() {
     userInfo();
-    //getSchedule();
+    getSchedule();
     termineGrid();
     kendoWindows();
 }

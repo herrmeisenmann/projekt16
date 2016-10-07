@@ -35,9 +35,6 @@ namespace Client.Server {
         private string lastnameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string passwordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Client.Server.Profession professionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -101,19 +98,6 @@ namespace Client.Server {
                 if ((object.ReferenceEquals(this.lastnameField, value) != true)) {
                     this.lastnameField = value;
                     this.RaisePropertyChanged("lastname");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.passwordField, value) != true)) {
-                    this.passwordField = value;
-                    this.RaisePropertyChanged("password");
                 }
             }
         }
@@ -514,6 +498,12 @@ namespace Client.Server {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/WriteToChat", ReplyAction="http://tempuri.org/IService/WriteToChatResponse")]
         System.Threading.Tasks.Task WriteToChatAsync(string user, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAverageGradeByUserId", ReplyAction="http://tempuri.org/IService/GetAverageGradeByUserIdResponse")]
+        double GetAverageGradeByUserId(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAverageGradeByUserId", ReplyAction="http://tempuri.org/IService/GetAverageGradeByUserIdResponse")]
+        System.Threading.Tasks.Task<double> GetAverageGradeByUserIdAsync(int userId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -645,6 +635,14 @@ namespace Client.Server {
         
         public System.Threading.Tasks.Task WriteToChatAsync(string user, string message) {
             return base.Channel.WriteToChatAsync(user, message);
+        }
+        
+        public double GetAverageGradeByUserId(int userId) {
+            return base.Channel.GetAverageGradeByUserId(userId);
+        }
+        
+        public System.Threading.Tasks.Task<double> GetAverageGradeByUserIdAsync(int userId) {
+            return base.Channel.GetAverageGradeByUserIdAsync(userId);
         }
     }
 }

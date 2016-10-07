@@ -15,12 +15,14 @@
     <pre id="chatbox"></pre>
 
         <label for="chat_username">Username: </label>
-        <input class="k-textbox" id="chat_username" diabled/><br />
-        <label for="chat_username">Message: </label>
+        <input class="k-textbox" id="chat_username" disabled />
+        <br />
+        <label for="chat_massage">Message: </label>
         <input class="k-textbox" id="chat_massage" size="63" />
         <br />
+    
         <button class="k-button" type="submit" id="submitChat" onclick="writeChat()">Senden</button>
 </div>
 <script>
-    $("#chat_username").val(localStorage['user_name']);
+            $("#chat_username").val(localStorage['user_name']);
 </script>

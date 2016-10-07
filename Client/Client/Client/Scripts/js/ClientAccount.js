@@ -67,6 +67,7 @@ function checkLogin() {
             alert(data);
             localStorage['user_name'] = $("#login_username").val();
             console.log(localStorage['user_name']);
+            window.location.href = "/Client";
         }
     });
 }
