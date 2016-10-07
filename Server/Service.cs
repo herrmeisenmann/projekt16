@@ -14,7 +14,6 @@ namespace Server
     public class Service : IService
     {
         private DbConnector dbConnector = new DbConnector();
-        private ChatHandler chatHandler = new ChatHandler();
 
         /// <summary>
         /// Gibt alle Klassen aus der Datenbank wieder
@@ -175,7 +174,7 @@ namespace Server
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
 
-            List<String> chat = chatHandler.GetChat();
+            List<String> chat = dbConnector.GetChat();
 
             if (amount <= 0)
             {
@@ -199,7 +198,7 @@ namespace Server
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
 
-            chatHandler.AddMessage(user, message);
+            dbConnector.CreateChatMessage(user, message);
         }
     }
 }

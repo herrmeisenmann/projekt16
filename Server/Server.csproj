@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatHandler.cs" />
     <Compile Include="Data\Classroom.cs" />
     <Compile Include="Data\Profession.cs" />
     <Compile Include="Data\User.cs" />

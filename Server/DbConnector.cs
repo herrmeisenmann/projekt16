@@ -486,6 +486,48 @@ namespace Server
             CloseConnection();
             return success;
         }
+
+        public bool CreateChatMessage(string username, string message)
+        {
+            DateTime date = DateTime.Now;
+            string MySQLFormatDate = date.ToString("yyyy-MM-dd HH:mm:ss");
+            string query = $"INSERT INTO chatlog (username, message, date) VALUES(\"{username}\",\"{message}\",\"{MySQLFormatDate}\"); ";
+
+            return ExecuteQuery(query);
+        }
+
+        public List<String> GetChat()
+        {
+            List<String> chat = new List<string>();
+
+            string query = $"SELECT * FROM chatlog";
+
+            OpenConnection();
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string username = dataReader["username"].ToString();
+                    string message = dataReader["message"].ToString();
+                    string date = dataReader["date"].ToString();
+
+                    chat.Add($"{date}|{username}: {message}");
+                }
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine($"Fehler beim Lesen von Datenbank: ${e}");
+            }
+
+            CloseConnection();
+
+            return chat;
+        }
     }
 }
 
