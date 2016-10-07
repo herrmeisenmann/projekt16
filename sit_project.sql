@@ -40,6 +40,32 @@ INSERT INTO `beruf` VALUES (1,'FIAE'),(2,'FISI');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `chatlog`
+--
+
+DROP TABLE IF EXISTS `chatlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `chatlog` (
+  `chatlog_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `message` varchar(45) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`chatlog_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chatlog`
+--
+
+LOCK TABLES `chatlog` WRITE;
+/*!40000 ALTER TABLE `chatlog` DISABLE KEYS */;
+INSERT INTO `chatlog` VALUES (10,'Jonas','','2016-10-07 10:51:06'),(11,'Jonas','Hallo','2016-10-07 10:51:12');
+/*!40000 ALTER TABLE `chatlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `class`
 --
 
@@ -159,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-06 12:18:24
+-- Dump completed on 2016-10-07 10:52:44
