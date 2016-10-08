@@ -1,9 +1,16 @@
-﻿var classesDataSource = null;
+﻿/**
+ * Created by Niklas Grieger on 27.09.2016.
+ * js for page - /ClientAccount
+ */
+
+//Global Variablen
+var classesDataSource = null;
 var professionDataSource = null;
 var drp_berufDropDown = null;
 var drp_klassenDropDown = null;
 var user_name = localStorage['user_name'];
 
+//Initialisieren von Kendo Elementen
 function kendoElements() {
     classesDataSource = new kendo.data.DataSource({
         transport: {
@@ -35,6 +42,7 @@ function kendoElements() {
     });
     drp_berufDropDown = $("#drp_berufDropDown").data("kendoDropDownList");
 }
+//Sendet die Values in den html elementen an die saveUser Methode in dem Controller - ClientAccountController
 function saveUser() {
     var usernameVal = $("#regist_username").val();
     var firstnameVal = $("#regist_fistname").val();
@@ -54,6 +62,7 @@ function saveUser() {
     });
     
 }
+//Wird aufgerufen wenn auf "Einloggen" geklickt wird. Sendet die Values in den html elementen an die checkLogin Methode in dem Controller - ClientAccountController
 function checkLogin() {
     var usernameVal = $("#login_username").val();
     var passwordVal = $("#login_password").val();
@@ -71,9 +80,11 @@ function checkLogin() {
         }
     });
 }
+//Initialisieren der Funktion beim laden der Page
 function init() {
     kendoElements();
 }
+//Init() wird aufgerufen, wenn die Page bereit ist
 $(document).ready(function () {
     init();
 });

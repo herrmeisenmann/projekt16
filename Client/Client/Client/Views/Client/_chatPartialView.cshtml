@@ -1,4 +1,5 @@
-﻿
+﻿@*Created by Niklas Grieger on 27.09.2016.
+    Partial View for the Chat /Client*@
 @{
     ViewBag.Title = "Chat";
     Layout = "";
@@ -6,23 +7,18 @@
 
 <h2>Chat</h2>
 <div id="chatContent">
-    @*<div id="menu">
-        <p class="welcome">Welcome, <b></b></p>
-        <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
-        <div style="clear:both"></div>
-    </div>*@
-
     <pre id="chatbox"></pre>
 
-        <label for="chat_username">Username: </label>
-        <input class="k-textbox" id="chat_username" disabled />
-        <br />
-        <label for="chat_massage">Message: </label>
-        <input class="k-textbox" id="chat_massage" size="63" />
-        <br />
+    <label for="chat_username">Username: </label>
+    <input class="k-textbox" id="chat_username" disabled />
+    <br />
+    <label for="chat_massage">Message: </label>
+    <input class="k-textbox" id="chat_massage" size="63" />
+    <br />
     
-        <button class="k-button" type="submit" id="submitChat" onclick="writeChat()">Senden</button>
+    <button class="k-button" type="submit" id="submitChat" onclick="writeChat()">Senden</button>
 </div>
 <script>
-            $("#chat_username").val(localStorage['user_name']);
+    //Füllt den Username in dem Chat mit dem lokal gespeicherten, dem eingeloggten
+   $("#chat_username").val(localStorage['user_name']);
 </script>
