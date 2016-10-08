@@ -58,7 +58,7 @@ namespace Server
         {
             Console.WriteLine($"Anfrage: {System.Reflection.MethodBase.GetCurrentMethod().Name}");
 
-            string filepath = $"C:\\GitProjects\\projekt16Server\\Server\\stundenplan\\";
+            string filepath = $"G:\\gitProjects\\projekt16Server\\Server\\stundenplan\\";
 
             //Wenn Datei vorhanden gebe diese wieder, ansonsten gebe "error.png" zurück
             if(File.Exists(filepath + $"{id}.jpg"))
