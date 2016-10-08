@@ -81,6 +81,9 @@ function termineGrid() {
                 },
             ]
         });
+        getAverage();
+}
+function getAverage(){
         $.ajax({
             url: "/Client/getGradAvg?id=" + user_id,
             success: function (data) {
@@ -189,6 +192,7 @@ function saveAppointment() {
         success: function (data) {
             alert(data);
             appointmentsDataSource.read();
+            getAverage();
             newAppointmentWindow.close();
         }
     });
