@@ -89,20 +89,21 @@ namespace Client.Controllers
         //Gibt das Stundenplan Bild als JSonObject zurück
         public JsonResult getSchedule(int id)
         {
-            string path = $"C:\\GitProjects\\projekt16new\\Client\\Pics\\{id}.jpg";
+            string pathLocal = $"G:\\gitProjects\\projekt16\\Client\\Pics\\{id}.jpg";
+            string pathServer = $"G:\\gitProjects\\projekt16Server\\Server\\stundenplan\\{id}.jpg";
             ServiceClient server = new ServiceClient();
             //Wenn die Datei lokal nicht vorhanden ist, wird das Bild von dem Server geholt und lokal abgespeichert
-            if (!System.IO.File.Exists(path))
+            if (!System.IO.File.Exists(pathLocal))
             {
-                FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
+                FileStream fileStream = new FileStream(pathLocal, FileMode.Create, FileAccess.Write);
                 Stream stream = server.GetClassScheduleById(id);
                 stream.CopyTo(fileStream);
                 fileStream.Dispose();
             }
             //Wenn das Bild Lokal gespeichert ist, wird es lokal geladen
-            if (System.IO.File.Exists(path))
+            if (System.IO.File.Exists(pathLocal))
             {
-                Byte[] bytes = System.IO.File.ReadAllBytes(path);
+                Byte[] bytes = System.IO.File.ReadAllBytes(pathLocal);
                 String file = Convert.ToBase64String(bytes);
                 return Json(file, JsonRequestBehavior.AllowGet);
             }
@@ -110,7 +111,7 @@ namespace Client.Controllers
             else
             {
                 //Keine Datei da auch nicht auf Server errorrr..
-                FileStream fileStream = new FileStream($"C:\\GitProjects\\projekt16new\\Client\\Pics\\error.png", FileMode.Create, FileAccess.Write);
+                FileStream fileStream = new FileStream($"G:\\gitProjects\\projekt16\\Client\\Pics\\error.png", FileMode.Create, FileAccess.Write);
                 byte[] buffer = new byte[fileStream.Length];
                 fileStream.Read(buffer, 0, (int)fileStream.Length);
                 fileStream.Close();

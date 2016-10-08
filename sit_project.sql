@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 06. Okt 2016 um 18:02
+-- Erstellungszeit: 08. Okt 2016 um 18:19
 -- Server-Version: 5.6.24
 -- PHP-Version: 5.6.8
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `sit_project`
 --
-CREATE DATABASE IF NOT EXISTS `sit_project` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `sit_project` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `sit_project`;
 
 -- --------------------------------------------------------
@@ -45,15 +45,37 @@ INSERT INTO `beruf` (`beruf_id`, `bezeichnung`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `chatlog`
+--
+
+DROP TABLE IF EXISTS `chatlog`;
+CREATE TABLE IF NOT EXISTS `chatlog` (
+  `chatlog_id` int(11) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `message` varchar(45) NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `chatlog`
+--
+
+INSERT INTO `chatlog` (`chatlog_id`, `username`, `message`, `date`) VALUES
+(10, 'Jonas', '', '2016-10-07 10:51:06'),
+(11, 'Jonas', 'Hallo', '2016-10-07 10:51:12');
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `class`
 --
 
 DROP TABLE IF EXISTS `class`;
 CREATE TABLE IF NOT EXISTS `class` (
   `class_id` int(11) NOT NULL,
-  `bezeichnung` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `bezeichnung` varchar(45) NOT NULL,
   `stundenplan_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Daten für Tabelle `class`
@@ -64,18 +86,6 @@ INSERT INTO `class` (`class_id`, `bezeichnung`, `stundenplan_id`) VALUES
 (2, 'IT4a', 1),
 (3, 'IT5a', 2),
 (4, 'Trinkverein Wilhelmsburg', 3);
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `stundenplan`
---
-
-DROP TABLE IF EXISTS `stundenplan`;
-CREATE TABLE IF NOT EXISTS `stundenplan` (
-  `stundenplan_id` int(11) NOT NULL,
-  `stundenplan_blob` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -148,16 +158,16 @@ ALTER TABLE `beruf`
   ADD PRIMARY KEY (`beruf_id`);
 
 --
+-- Indizes für die Tabelle `chatlog`
+--
+ALTER TABLE `chatlog`
+  ADD PRIMARY KEY (`chatlog_id`);
+
+--
 -- Indizes für die Tabelle `class`
 --
 ALTER TABLE `class`
   ADD PRIMARY KEY (`class_id`), ADD UNIQUE KEY `class_id_UNIQUE` (`class_id`);
-
---
--- Indizes für die Tabelle `stundenplan`
---
-ALTER TABLE `stundenplan`
-  ADD PRIMARY KEY (`stundenplan_id`);
 
 --
 -- Indizes für die Tabelle `termine`
@@ -181,15 +191,15 @@ ALTER TABLE `user`
 ALTER TABLE `beruf`
   MODIFY `beruf_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT für Tabelle `chatlog`
+--
+ALTER TABLE `chatlog`
+  MODIFY `chatlog_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
 -- AUTO_INCREMENT für Tabelle `class`
 --
 ALTER TABLE `class`
   MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT für Tabelle `stundenplan`
---
-ALTER TABLE `stundenplan`
-  MODIFY `stundenplan_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `termine`
 --
