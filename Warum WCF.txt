@@ -1,0 +1,9 @@
+Warum WCF(Windows Communication Foundation) als Web-Service Host:
+
+- einfache Einrichtung
+- die meisten Einstellungen können im Nachhinein angepasst und verändert werden, ohne den Code zu bearbeiten (Transportprotokolle, Security Models, Compression, Encoding, Timeouts)
+- der Service kann mit den meisten Sprachen (u.a. Java) konsumiert werden.
+- es können mehrere Endpunkte konfiguriert werden, welche mit verschiedenen Einstellungen arbeiten(z.B. eines über HTTP und ein anderes über TCP)
+- Datenstrukturen und Methoden werden über Metadaten an den Client übergeben
+
+- ein .NET Client brauch nur eine Service-Referenz über den Link ("http://localhost/1234/Service/") hinzufügen und kann anschließend den Web-Service über einfache Methodenaufrufe nutzen.
