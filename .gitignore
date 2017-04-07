@@ -1,0 +1,30 @@
+# Build-Verzeichnis unserer Projekte
+/build/
+
+# Heruntergeladene NuGet-Packages
+/packages/
+
+# Generierte Versionsinformationen
+AssemblyInfo.Version.cs
+
+# Benutzerspezifische Einstellungen zu Visual-Studio-Solutions unter VS2015
+/.vs/
+
+# Benutzerspezifische Einstellungen zu Visual-Studio-Solutions
+*.suo
+
+# Benutzerspezifische Einstellungen zu Visual-Studio-Projekten
+*.csproj.user
+
+# Ergebnisse der Coverage-Analyse für Visual-Studio-Tests
+*.coverage
+
+# Automatisch erzeugte Sicherheitskopien, z.B. von WinMerge
+*.bak
+
+# Temporäre Dateien zu MS-Office-Dokumenten
+~$*
+
+/bin/
+/obj/
+.cr/
