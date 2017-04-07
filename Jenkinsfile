@@ -1,12 +1,12 @@
-#!groovy
-agent any{
-	pipeline {
-		stages {
-			stage ('Test') {
-				echo 'Hallo Pipeline'
-			
-			}
-		
-		}
-	}
+pipeline {
+  agent {
+    label ‘’
+  }
+  stages {
+    stage(‘Build’) {
+      steps{
+        echo 'Hallo'
+      }
+    }
+  }
 }
