@@ -1,6 +1,5 @@
 #!groovy
-agent any
-{
+agent any{
 	pipeline {
 		stages {
 			stage ('Test') {
